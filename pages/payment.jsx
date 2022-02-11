@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Store } from '../utils/Store';
 import CheckoutWizard from '../components/CheckoutWizard';
-import Swal from 'sweetalert2';
+
 import { NextSeo } from 'next-seo';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -11,51 +11,25 @@ import styles from '../styles/sass/main.module.scss';
 import Image from 'next/image';
 
 export default function Payment() {
-  const [paymentMethod, setPaymentMethod] = useState('');
+  //const [paymentMethod, setPaymentMethod] = useState('');
   const loginSchema = Yup.object().shape({
     payment: Yup.string().required('Name is required'),
   });
 
   const router = useRouter();
 
-  const { state, dispatch } = useContext(Store);
-  const {
-    cart: { shippingAddress },
-  } = state;
-
-  useEffect(() => {
-    if (!shippingAddress.student) {
-      router.push('/shipping');
-    } else {
-      setPaymentMethod(Cookies.get('paymentMethod') || '');
-    }
-  }, []);
+  const { dispatch } = useContext(Store);
+  // const {
+  //   cart: { shippingAddress },
+  // } = state;
 
   const submitHandler = async (values) => {
-    if (!paymentMethod) {
-      Toast.fire({
-        icon: 'error',
-        title: 'Payment method is required',
-      });
-    } else {
-      const { payment } = values;
-      dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: payment });
-      Cookies.set('paymentMethod', JSON.stringify(payment));
-      router.push('/placeorder');
-    }
-  };
+    const { payment } = values;
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'center',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
-    },
-  });
+    dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: payment });
+    Cookies.set('paymentMethod', JSON.stringify(payment));
+    router.push('/placeorder');
+  };
 
   return (
     <>
