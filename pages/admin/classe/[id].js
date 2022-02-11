@@ -126,15 +126,6 @@ const ProductEdit = ({ params }) => {
           });
           dispatch({ type: 'FETCH_SUCCESS' });
           setValue(data);
-          //console.log(data);
-
-          // setValue('slug', data.slug);
-          // setValue('price', data.price);
-          // setValue('image', data.image);
-          // setValue('category', data.category);
-          // setValue('brand', data.brand);
-          // setValue('countInStock', data.countInStock);
-          // setValue('description', data.description);
         } catch (err) {
           dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
         }
@@ -535,6 +526,11 @@ const ProductEdit = ({ params }) => {
                     />
                   </div>
                   {loadingUpdate && (
+                    <div className={styles.spinner}>
+                      <CircularProgress />
+                    </div>
+                  )}
+                  {loadingUpload && (
                     <div className={styles.spinner}>
                       <CircularProgress />
                     </div>

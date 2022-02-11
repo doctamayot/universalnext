@@ -129,7 +129,7 @@ const Login = () => {
                 />
               </div>
               <div className={styles.logincontact__note}>
-                Don't have an account? ;
+                Don`t have an account?
                 <NextLink href="/register" passHref>
                   <a className={styles.logincontact__note__title}>Register</a>
                 </NextLink>

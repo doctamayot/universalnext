@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Store } from '../utils/Store';
-import NextLink from 'next/link';
+
 import Image from 'next/image';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import styles from '../styles/sass/main.module.scss';
 import { NextSeo } from 'next-seo';
 import CheckoutWizard from '../components/CheckoutWizard';
-import Spinner from '../components/Spinner';
+
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import { CircularProgress } from '@material-ui/core';

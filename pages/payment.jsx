@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import { Store } from '../utils/Store';
 import CheckoutWizard from '../components/CheckoutWizard';
-
+import Swal from 'sweetalert2';
 import { NextSeo } from 'next-seo';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -32,12 +32,30 @@ export default function Payment() {
   }, []);
 
   const submitHandler = async (values) => {
-    const { payment } = values;
-
-    dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: payment });
-    Cookies.set('paymentMethod', JSON.stringify(payment));
-    router.push('/placeorder');
+    if (!paymentMethod) {
+      Toast.fire({
+        icon: 'error',
+        title: 'Payment method is required',
+      });
+    } else {
+      const { payment } = values;
+      dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: payment });
+      Cookies.set('paymentMethod', JSON.stringify(payment));
+      router.push('/placeorder');
+    }
   };
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
 
   return (
     <>
