@@ -11,7 +11,6 @@ import styles from '../styles/sass/main.module.scss';
 import Image from 'next/image';
 
 export default function Payment() {
-  //const [paymentMethod, setPaymentMethod] = useState('');
   const loginSchema = Yup.object().shape({
     payment: Yup.string().required('Name is required'),
   });
