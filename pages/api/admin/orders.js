@@ -11,8 +11,10 @@ handler.use(isAuth, isAdmin);
 
 handler.get(async (req, res) => {
   await db.connect();
-  const orders = await Order.find({})
+  let orders = await Order.find({})
     .populate('user', 'firstname lastname')
+    // .populate({ path: 'user', select: 'firstname' })
+    // .populate({ path: 'user', select: 'lastname' })
     .sort({ createdAt: -1 });
   await db.disconnect();
   res.send(orders);

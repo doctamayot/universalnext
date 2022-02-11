@@ -72,6 +72,7 @@ function AdminDashboard() {
         const { data } = await axios.get(`/api/admin/orders`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
+        console.log(data);
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });

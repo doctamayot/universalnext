@@ -32,6 +32,7 @@ const Navbar = ({ toggleSidebar }) => {
     setAnchorEl(false);
     dispatch({ type: 'USER_LOGOUT' });
     Cookies.remove('cartItems');
+    Cookies.remove('userInfo');
   };
 
   return (
