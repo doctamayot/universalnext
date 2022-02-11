@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
 import { Store } from '../utils/Store';
 import CheckoutWizard from '../components/CheckoutWizard';
-import Swal from 'sweetalert2';
+
 import { NextSeo } from 'next-seo';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -11,6 +11,7 @@ import styles from '../styles/sass/main.module.scss';
 import Image from 'next/image';
 
 export default function Payment() {
+  const [paymentMethod, setPaymentMethod] = useState('');
   const loginSchema = Yup.object().shape({
     payment: Yup.string().required('Name is required'),
   });
@@ -21,6 +22,14 @@ export default function Payment() {
   const {
     cart: { shippingAddress },
   } = state;
+
+  useEffect(() => {
+    if (!shippingAddress.address) {
+      router.push('/shipping');
+    } else {
+      setPaymentMethod(Cookies.get('paymentMethod') || '');
+    }
+  }, []);
 
   const submitHandler = async (values) => {
     const { payment } = values;

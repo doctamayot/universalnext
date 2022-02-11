@@ -1,41 +1,13 @@
 import styles from '../styles/sass/main.module.scss';
-import Link from 'next/link';
+
 import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from 'react-icons/bs';
 import { AiOutlineCopyright } from 'react-icons/ai';
 
 import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
 
 import React from 'react';
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
 const Footer = () => {
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
   return (
     <div className={styles.contfood}>
       <h3 className={styles.contfood__title}>our study places</h3>

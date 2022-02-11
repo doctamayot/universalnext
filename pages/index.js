@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Comments from '../components/Comments';
 import { NextSeo } from 'next-seo';
 import Jobs from '../components/jobs';
@@ -111,7 +110,7 @@ export default function Home(props) {
         </ul>
       </div>
       <Comments />
-      {/* <Jobs /> */}
+      <Jobs />
       <Mision />
     </>
   );

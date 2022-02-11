@@ -26,7 +26,7 @@ const Mision = () => {
           <p className={styles.space}></p> This innovative learning facility
           provides actors and artists with the skills and vital information they
           will need in order to succeed in the entertainment industry.
-          <p className={styles.space}></p> ​ Classes are led by industry
+          <p className={styles.space}></p>Classes are led by industry
           professionals / educators and will provide students with comprehensive
           curriculum and programs.
           <p className={styles.space}></p>

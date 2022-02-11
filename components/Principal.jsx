@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { FiFacebook, FiInstagram, FiTwitter, FiYoutube } from 'react-icons/fi';
-import Spinner from './Spinner';
 
 const Principal = () => {
   return (

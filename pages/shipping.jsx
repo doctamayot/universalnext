@@ -28,7 +28,7 @@ export default function Shipping() {
   const { state, dispatch } = useContext(Store);
   const {
     userInfo,
-    cart: { shippingAddress },
+    //  cart: { shippingAddress },
   } = state;
 
   useEffect(() => {

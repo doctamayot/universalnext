@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 
 import { NextSeo } from 'next-seo';
 
-const login = () => {
+const Register = () => {
   const router = useRouter();
   const { redirect } = router.query; // login?redirect=/shipping
   const { state, dispatch } = useContext(Store);
@@ -247,4 +247,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Register;

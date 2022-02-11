@@ -60,7 +60,7 @@ const Order = ({ params }) => {
   } = state;
 
   const [
-    { loading, error, order, successPay, loadingDeliver, successDeliver },
+    { loading, order, successPay, loadingDeliver, successDeliver },
     dispatch,
   ] = useReducer(reducer, {
     loading: true,

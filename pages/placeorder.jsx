@@ -13,7 +13,7 @@ import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import { CircularProgress } from '@material-ui/core';
 
-function placeorder() {
+function Placeorder() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -173,4 +173,4 @@ function placeorder() {
   );
 }
 
-export default dynamic(() => Promise.resolve(placeorder), { ssr: false });
+export default dynamic(() => Promise.resolve(Placeorder), { ssr: false });

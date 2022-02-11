@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles/sass/main.module.scss';
@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import { NextSeo } from 'next-seo';
 
-const login = () => {
+const Login = () => {
   const router = useRouter();
   const { redirect } = router.query; // login?redirect=/shipping
   const { state, dispatch } = useContext(Store);
@@ -129,7 +129,7 @@ const login = () => {
                 />
               </div>
               <div className={styles.logincontact__note}>
-                Don't have an account? &nbsp;
+                Don't have an account? ;
                 <NextLink href="/register" passHref>
                   <a className={styles.logincontact__note__title}>Register</a>
                 </NextLink>
@@ -142,4 +142,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

@@ -46,11 +46,10 @@ const ProductEdit = ({ params }) => {
   const [imagecloud, setImage] = useState('');
   const productId = params.id;
   const { state } = useContext(Store);
-  const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      error: '',
-    });
+  const [{ loadingUpdate, loadingUpload }, dispatch] = useReducer(reducer, {
+    loading: true,
+    error: '',
+  });
   const router = useRouter();
 
   const { userInfo } = state;
@@ -142,7 +141,7 @@ const ProductEdit = ({ params }) => {
       };
       fetchData();
     }
-  }, [setValue]);
+  }, [setValue, productId]);
 
   const uploadHandler = async (e) => {
     const file = e.target.files[0];

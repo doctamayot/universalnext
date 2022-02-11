@@ -15,7 +15,7 @@ import {
 import { getError } from '../utils/error';
 import { Store } from '../utils/Store';
 import styles from '../styles/sass/main.module.scss';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import { NextSeo } from 'next-seo';
 

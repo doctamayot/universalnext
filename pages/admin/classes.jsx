@@ -46,7 +46,7 @@ function reducer(state, action) {
   }
 }
 
-const classes = () => {
+const Classes = () => {
   const { state } = useContext(Store);
   const router = useRouter();
   const { userInfo } = state;
@@ -131,9 +131,9 @@ const classes = () => {
     }
   };
   const deleteHandler = async (productId) => {
-    // if (!window.confirm('Are you sure?')) {
-    //   return;
-    // }
+    if (!window.confirm('Are you sure?')) {
+      return;
+    }
     try {
       dispatch({ type: 'DELETE_REQUEST' });
       Swal.fire({
@@ -300,4 +300,4 @@ const classes = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(classes), { ssr: false });
+export default dynamic(() => Promise.resolve(Classes), { ssr: false });
