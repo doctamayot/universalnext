@@ -1,6 +1,6 @@
 import Comments from '../components/Comments';
 import { NextSeo } from 'next-seo';
-import Jobs from '../components/jobs';
+import Jobs from '../components/Jobs';
 import Mision from '../components/Mision';
 import Principal from '../components/Principal';
 
