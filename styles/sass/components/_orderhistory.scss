@@ -1,0 +1,79 @@
+.orderhistcontainer {
+  margin-top: 20px;
+  height: 170vh;
+
+  @include respond(tab-land) {
+    display: flex;
+
+    &__left {
+      width: 20%;
+
+      &__menu {
+        max-width: 200px;
+      }
+    }
+
+    &__right {
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+
+  &__right {
+    text-align: center;
+  }
+
+  &__title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+    text-align: center;
+    letter-spacing: 1px;
+    margin: 30px auto;
+    margin-left: 2%;
+    //width: 30%;
+    @include respond(tab-land) {
+      text-align: start;
+      padding: 20px;
+    }
+  }
+  &__left {
+    font-family: 'Dosis', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 0px;
+    color: #fff;
+    border-right: 1px solid #000;
+
+    &__menu {
+      margin: 10px auto;
+
+      background-color: rgb(111, 109, 245);
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+    }
+  }
+}
+
+.orderhistcontleft {
+  margin-top: 30px;
+  font-family: 'Dosis', sans-serif;
+  font-size: 3rem;
+}
+
+.orderhistcontright {
+  margin-top: 30px;
+  font-family: 'Dosis', sans-serif;
+  border: 1px solid;
+}
+
+.nohaybookings {
+  font-size: 3rem;
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+  background-color: rgb(111, 109, 245);
+  width: 40%;
+  margin: 40px auto;
+  color: #fff;
+  padding: 10px;
+}

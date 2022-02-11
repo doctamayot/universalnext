@@ -1,0 +1,106 @@
+.cartcontainer {
+  margin: 20px auto;
+  width: 100%;
+  text-align: center;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3rem;
+  height: 100vh;
+
+  &__title {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 30px;
+    @include respond(tab-land) {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+  }
+  &__cartresume {
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 30px;
+
+    &__button {
+      background-color: rgb(228, 215, 44);
+      padding: 10px;
+      font-family: 'Bebas Neue', cursive;
+      border: none;
+      color: white;
+      width: 70%;
+      cursor: pointer;
+      font-size: 2rem;
+      &:hover {
+        background-color: rgb(105, 104, 102);
+      }
+      @include respond(tab-land) {
+        width: 80%;
+        margin: 20px 20px;
+        height: 80px;
+      }
+    }
+    @include respond(tab-land) {
+      width: 100%;
+      margin: 20px 20px;
+    }
+  }
+  &__articles {
+    margin: 20px auto;
+    width: 90%;
+    @include respond(tab-land) {
+      width: 60%;
+      margin: 20px auto;
+    }
+
+    &__article {
+      display: flex;
+      font-size: 1.4rem;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Dosis', sans-serif;
+      margin-top: 10px;
+      &__hugo {
+        color: black;
+      }
+      &__buttonadd {
+        background-color: black;
+        color: white;
+        width: 20px;
+        height: 20px;
+        font-size: 1rem;
+        border: none;
+      }
+      &__buttoncant {
+        background-color: white;
+        color: black;
+        width: 20px;
+        height: 20px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      &__remove {
+        color: rgb(255, 255, 255);
+        background-color: rgb(230, 15, 15);
+        padding: 10px 15px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      &__dos {
+        font-size: 1.2rem;
+      }
+    }
+
+    // &__container {
+    //   display: flex;
+    //   flex-direction: column;
+    // }
+  }
+
+  // @include respond(tab-land) {
+  //   display: flex;
+  //   margin: 0 50px;
+  // }
+}

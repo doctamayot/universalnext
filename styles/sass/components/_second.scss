@@ -1,0 +1,247 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+
+  @include respond(phone) {
+    padding: 5px;
+  }
+
+  @include respond(tab-port) {
+    padding: 5px;
+  }
+
+  @include respond(tab-land) {
+    padding: 5px;
+  }
+
+  &__image {
+    margin-top: 15px;
+
+    @include respond(tab-port) {
+      text-align: center;
+    }
+
+    @include respond(tab-port) {
+      margin-top: 10px;
+    }
+    @include respond(tab-land) {
+      margin-top: 70px;
+    }
+  }
+
+  &__title {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bolder;
+    font-size: 5rem;
+    margin-top: 50px;
+    text-align: center;
+
+    @include respond(phone) {
+      text-align: center;
+      margin-top: 5px;
+    }
+    @include respond(tab-port) {
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    @include respond(tab-land) {
+      text-align: center;
+      margin-top: 50px;
+    }
+  }
+
+  &__text {
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.7rem;
+    margin-top: 10px;
+    text-align: center;
+    @include respond(phone) {
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 0 10px;
+    }
+
+    @include respond(tab-port) {
+      text-align: center;
+      font-size: 1.7rem;
+      padding: 0 10px;
+    }
+    @include respond(tab-land) {
+      text-align: center;
+      font-size: 1.7rem;
+      padding: 0 10px;
+    }
+  }
+}
+
+.classes {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  width: 100%;
+  margin: 50px auto;
+
+  @include respond(desktop) {
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 90%;
+    margin: 40px auto;
+    column-gap: 10px;
+  }
+
+  @include respond(tab-port) {
+    width: 50%;
+  }
+
+  @include respond(desktop) {
+    width: 90%;
+  }
+
+  &__item {
+    // font-family: 'Dosis', sans-serif;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // display: flex;
+
+    // box-shadow: 7px 6px 5px 0px rgba(0, 0, 0, 0.75);
+    // -webkit-box-shadow: 7px 6px 5px 0px rgba(0, 0, 0, 0.75);
+    // -moz-box-shadow: 7px 6px 5px 0px rgba(0, 0, 0, 0.75);
+    // margin-bottom: 20px;
+    // height: auto;
+    display: grid;
+    grid-template-rows: 65px 180px 100px 350px 100px;
+    text-align: center;
+    @include respond(phone) {
+      grid-template-rows: 65px 250px 100px 350px 100px;
+    }
+
+    @include respond(tab-land) {
+      grid-template-rows: 65px 250px 100px 350px 100px;
+    }
+    @include respond(desktop) {
+      width: 100%;
+      box-shadow: 0px 10px 13px -7px #000000;
+      text-align: center;
+    }
+
+    @include respond(big-desktop) {
+      grid-template-rows: 65px 290px 100px 250px 100px;
+    }
+    &__image {
+      justify-self: center;
+    }
+
+    &__title {
+      font-size: 2rem;
+      background: rgb(111, 109, 245);
+      width: 100%;
+      color: rgb(255, 255, 255);
+      text-align: center;
+      padding-top: 15px;
+      position: relative;
+      z-index: 3;
+
+      @include respond(phone) {
+        height: 3vh;
+      }
+
+      @include respond(tab-port) {
+        height: 3vh;
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+      @include respond(tab-land) {
+        height: 3vh;
+        font-size: 1.9rem;
+      }
+      &__cate {
+        position: absolute;
+        top: 0px;
+        color: yellowgreen;
+        left: 0;
+        padding: 10px;
+        font-size: 1.5rem;
+
+        @include respond(tab-land) {
+          font-size: 1.1rem;
+        }
+      }
+
+      &__loc {
+        position: absolute;
+        bottom: -10px;
+        color: white;
+        right: 0;
+        padding: 5px;
+        font-size: 1.2rem;
+        background-color: red;
+        border-radius: 50px;
+        width: 130px;
+      }
+    }
+
+    &__parrafo {
+      margin-top: 10000000px;
+      font-size: 1.6rem;
+      text-align: center;
+      font-family: 'Dosis', sans-serif;
+      padding: 0 10px;
+
+      @include respond(phone) {
+        margin-top: -20px;
+      }
+      @include respond(tab-land) {
+        padding: 0px 20px;
+        font-size: 1.5rem;
+        margin-top: 20px;
+      }
+
+      @include respond(desktop) {
+        font-size: 1.5rem;
+        margin-top: 20px;
+      }
+
+      @include respond(big-desktop) {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__varios {
+      font-size: 1.6rem;
+      margin-top: 350px;
+      font-weight: 600;
+      margin-left: 20px;
+      justify-self: center;
+      width: 100%;
+      color: yellowgreen;
+      text-align: center;
+      font-family: 'Dosis', sans-serif;
+
+      @include respond(tab-port) {
+        text-align: center;
+      }
+
+      @include respond(phone) {
+        margin-top: 300px;
+        font-size: 2.4rem;
+      }
+
+      @include respond(desktop) {
+        margin-top: 0px;
+        font-size: 2rem;
+      }
+
+      &__precio {
+        font-size: 3rem;
+        margin-top: 30px;
+        color: rgb(194, 73, 51);
+      }
+    }
+  }
+}

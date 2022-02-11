@@ -1,0 +1,31 @@
+.contjobs {
+  display: block;
+  margin: 10px 20px;
+  font-size: 10px;
+  color: black;
+  text-align: center;
+
+  @include respond(big-desktop) {
+    margin: 20px 270px;
+  }
+
+  &__title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 6rem;
+    text-align: center;
+    margin-top: 20px;
+    color: rgb(157, 212, 47);
+  }
+  &__video {
+    width: 320px;
+    height: 350px;
+    margin-top: 20px;
+    @include respond(tab-port) {
+      padding: 10px;
+    }
+
+    @include respond(big-desktop) {
+      width: 350px;
+    }
+  }
+}

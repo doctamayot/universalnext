@@ -1,0 +1,21 @@
+.switch {
+  position: fixed;
+  top: 5px;
+  right: -20px;
+  width: 100px;
+  display: flex;
+  font-size: 1rem;
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 1px;
+  @include respond(phone) {
+    font-size: 1.2rem;
+    top: 20px;
+    right: -15px;
+  }
+
+  @include respond(tab-land) {
+    font-size: 1.4rem;
+    top: 10px;
+    right: -5px;
+  }
+}

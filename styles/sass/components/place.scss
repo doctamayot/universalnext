@@ -1,0 +1,88 @@
+.placeordercontainer {
+  padding: 20px;
+
+  @include respond(tab-land) {
+    display: flex;
+    justify-content: space-around;
+
+    &__child1 {
+      width: 100%;
+    }
+    &__pilas {
+      width: 40%;
+      margin-right: 150px;
+    }
+  }
+
+  &__total {
+    text-align: center;
+    font-size: 4rem;
+    margin-top: 30px;
+  }
+
+  &__cart {
+    margin-top: 30px;
+
+    &__items {
+      display: flex;
+      font-family: 'Dosis', sans-serif;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 1.5rem;
+      margin-top: 20px;
+      margin-left: 20px;
+      border: 1px solid;
+      @include respond(tab-land) {
+        width: 60%;
+        margin: 20px auto;
+      }
+
+      &__u {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 40px;
+        padding: 20px;
+        @include respond(tab-land) {
+          margin-left: 80px;
+        }
+      }
+    }
+  }
+  &__title {
+    font-size: 4rem;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+  }
+
+  &__items {
+    font-family: 'Dosis', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 20px;
+    border: 1px solid;
+    padding: 30px;
+
+    @include respond(tab-land) {
+      width: 60%;
+      margin: 20px auto;
+    }
+
+    &__title {
+      font-weight: bold;
+    }
+  }
+}
+
+.notpaid {
+  color: rgb(194, 38, 38);
+}
+
+.paypal {
+  margin-top: 20px;
+  text-align: center;
+
+  @include respond(tab-land) {
+    width: 50%;
+    margin: 0 auto;
+  }
+}

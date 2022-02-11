@@ -1,0 +1,79 @@
+.logincontact {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 30px 20px;
+
+  &__note {
+    font-size: 2rem;
+
+    width: 80%;
+    margin: 0 auto;
+    font-family: 'Dosis', sans-serif;
+    &__title {
+      color: rgb(157, 212, 47);
+    }
+  }
+
+  &__title {
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+    letter-spacing: 1px;
+  }
+
+  &__discampo {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Dosis', sans-serif;
+    font-size: 2rem;
+    &__label {
+      font-size: 2rem;
+
+      width: 80%;
+      margin: 10px auto;
+    }
+  }
+
+  &__campo {
+    height: 50px;
+    width: 80%;
+    margin: 1px auto;
+
+    border: 1px solid rgb(157, 212, 47);
+    &__desc {
+      height: 150px;
+      width: 80%;
+      margin: 1px auto;
+
+      border: 1px solid rgb(157, 212, 47);
+    }
+  }
+  &__button {
+    height: 35px;
+    width: 80%;
+    margin: 30px auto;
+    border: none;
+    background-color: rgb(157, 212, 47);
+    color: white;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  @include respond(tab-land) {
+    width: 30%;
+    margin: 30px auto;
+
+    &__button {
+      width: 40%;
+    }
+  }
+}
+
+.formerror {
+  color: rgb(214, 41, 41);
+  margin: 0px auto;
+  width: 80%;
+}

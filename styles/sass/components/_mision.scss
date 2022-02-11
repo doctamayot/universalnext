@@ -1,0 +1,60 @@
+.containermision {
+  display: block;
+  //grid-template-columns: repeat(2, 1fr);
+  background-image: linear-gradient(to right, #4e54c8, rgb(111, 109, 245));
+  margin-top: 50px;
+  @include respond(desktop) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: column dense;
+    padding: 20px 50px;
+
+    margin: 50px 200px;
+  }
+
+  &__left {
+    padding: 10px;
+
+    @include respond(desktop) {
+      grid-column: 1 / 2;
+      padding: 0;
+    }
+
+    &__text1 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 5rem;
+      text-align: center;
+      color: rgb(157, 212, 47);
+      margin-top: 20px;
+    }
+    &__text2 {
+      font-size: 1.3rem;
+      color: rgb(252, 252, 252);
+      padding: 10px;
+      font-family: 'Dosis', sans-serif;
+      margin-bottom: 50px;
+      @include respond(tab-port) {
+        font-size: 2rem;
+        padding: 0 50px;
+      }
+      @include respond(desktop) {
+        font-size: 1.3rem;
+        padding: 0 0px;
+      }
+      @include respond(big-desktop) {
+        font-size: 1.7rem;
+      }
+    }
+  }
+  &__right {
+    text-align: center;
+    padding-top: 40px;
+    @include respond(desktop) {
+      margin-top: 100px;
+    }
+  }
+}
+
+.space {
+  margin-top: 5px;
+}

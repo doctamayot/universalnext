@@ -1,0 +1,48 @@
+.containercomm {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  margin: 10px 10px;
+  @include respond(big-desktop) {
+    margin: 0 200px;
+  }
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  &__main {
+    margin-top: 30px;
+    &__image {
+      margin: 0 auto;
+      border-radius: 100%;
+    }
+
+    &__name {
+      font-size: 3rem;
+      font-family: 'Dosis', sans-serif;
+      color: rgb(157, 212, 47);
+      @include respond(desktop) {
+        font-size: 3.5rem;
+      }
+    }
+
+    &__comm {
+      font-family: 'Licorice', cursive;
+      font-size: 2.4rem;
+      width: 60%;
+      margin: 10px auto;
+      color: white;
+      margin-bottom: 30px;
+      @include respond(desktop) {
+        font-size: 3.5rem;
+      }
+    }
+  }
+}

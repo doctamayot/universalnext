@@ -1,0 +1,339 @@
+.principal {
+  background-color: rgb(111, 109, 245);
+  display: flex;
+  border-radius: 0% 0% 38% 59% / 0% 0% 21% 21%;
+  height: 30rem;
+
+  @include respond(tab-land) {
+    height: 75vh;
+  }
+
+  &__image {
+    max-width: 100%;
+    @include respond(tab-port) {
+      max-width: 55%;
+      margin: 0 auto;
+      margin-top: -30px;
+    }
+  }
+
+  &__main {
+    &:nth-child(1) {
+      margin-top: 10px;
+      margin-left: 20px;
+      @include respond(tab-port) {
+        flex: 1;
+      }
+
+      @include respond(tab-land) {
+        margin-top: 90px;
+        flex: 1;
+        margin-left: 200px;
+      }
+    }
+    &:nth-child(2) {
+      padding: 0px;
+      @include respond(tab-port) {
+        flex: 1;
+      }
+      @include respond(tab-land) {
+        margin-top: 90px;
+        flex: 2;
+      }
+    }
+    &__title {
+      font-size: 2.9rem;
+      color: rgb(255, 255, 255);
+      line-height: 25px;
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 2px;
+      text-align: left;
+      @include respond(phone) {
+        font-size: 4rem;
+        line-height: 35px;
+      }
+      @include respond(desktop) {
+        font-size: 7rem;
+        line-height: 55px;
+      }
+    }
+    &__parr {
+      text-align: center;
+      font-size: 1.4rem;
+      color: rgb(255, 255, 255);
+      margin-top: 10px;
+      font-family: 'Dosis', sans-serif;
+      @include respond(phone) {
+        font-size: 2rem;
+        line-height: 25px;
+      }
+      @include respond(tab-land) {
+        font-size: 3rem;
+        line-height: 28px;
+        margin-top: 40px;
+        text-align: left;
+      }
+    }
+
+    &__button {
+      font-size: 1.3rem;
+      color: rgb(255, 255, 255);
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: rgb(157, 212, 47);
+      cursor: pointer;
+      border: none;
+      font-family: 'Bebas Neue', cursive;
+
+      @include respond(tab-land) {
+        font-size: 3rem;
+        line-height: 28px;
+        margin-top: 40px;
+        width: 100%;
+      }
+    }
+
+    &__redes {
+      flex-direction: row;
+      display: flex;
+      justify-content: center;
+      @include respond(tab-land) {
+        margin-left: 5rem;
+      }
+    }
+    &__red {
+      color: rgb(178, 233, 69);
+      max-width: 25px;
+      padding: 0px;
+      margin-left: 0.5rem;
+      @include respond(tab-land) {
+        max-width: 50px;
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+// .principal {
+//   //background-color: rgb(238, 186, 73);
+//   display: flex;
+//   background-color: rgb(111, 109, 245);
+//   height: 80vh;
+//   border-radius: 0% 0% 38% 59% / 0% 0% 21% 21%;
+
+//   &__image {
+//     max-width: 100%;
+//     @include respond(tab-land) {
+//       max-width: 10%;
+//     }
+//   }
+
+//   @include respond(phone) {
+//     display: flex;
+//     height: 43vh;
+//   }
+
+//   @include respond(tab-port) {
+//     display: flex;
+//     height: 35vh;
+//   }
+
+//   @include respond(tab-land) {
+//     display: flex;
+//     height: 35vh;
+//   }
+
+//   //   @include respond(desktop) {
+//   //     height: 100vh;
+//   //     width: 150%;
+//   //   }
+
+//   &__main {
+//     display: flex;
+//     position: relative;
+
+//     &__red {
+//       color: rgb(164, 233, 25);
+//       display: flex;
+//       margin-top: 20px;
+
+//       @include respond(phone) {
+//         max-width: 30px;
+
+//         padding: 4px;
+//       }
+
+//       @include respond(tab-port) {
+//         max-width: 40px;
+//       }
+
+//       @include respond(tab-land) {
+//         max-width: 40px;
+//       }
+//     }
+
+//     &__redes {
+//       position: absolute;
+//       top: 0px;
+//       right: 28%;
+//       margin-top: 30px;
+
+//       @include respond(phone) {
+//         display: flex;
+//         top: 15rem;
+//         flex-direction: row;
+//         right: 8%;
+//         max-width: 160px;
+//       }
+
+//       @include respond(tab-port) {
+//         display: flex;
+//         top: 23rem;
+//         flex-direction: row;
+//         right: 15%;
+//       }
+
+//       @include respond(tab-land) {
+//         display: flex;
+//         flex-direction: column;
+//         top: 20px;
+//         right: 2%;
+
+//         width: 50px;
+//       }
+//     }
+//     // &__pres {
+//     //   display: flex;
+//     // }
+//     &:nth-child(1) {
+//       display: flex;
+//       flex: 3;
+//       margin-top: 30px;
+//       flex-direction: column;
+//       border: 1px solid;
+//       align-items: flex-end;
+//       justify-content: flex-start;
+
+//       @include respond(phone) {
+//         margin-left: -30px;
+//         margin-top: 15px;
+//       }
+
+//       @include respond(tab-port) {
+//         margin-left: -50px;
+//         margin-top: 15px;
+//       }
+
+//       @include respond(tab-land) {
+//         margin-left: -100px;
+//         margin-top: 15px;
+//       }
+//     }
+
+//     &:nth-child(2) {
+//       display: flex;
+//       flex: 2;
+//       align-items: flex-start;
+//       margin-top: 50px;
+
+//       @include respond(phone) {
+//         margin-top: 15px;
+//       }
+
+//       @include respond(tab-port) {
+//         margin-top: 15px;
+//       }
+//       @include respond(tab-land) {
+//         margin-top: 15px;
+//       }
+//     }
+
+//     &__title {
+//       font-size: 3rem;
+//       color: rgb(255, 255, 255);
+//       width: 60%;
+//       line-height: 25px;
+//       font-family: 'Bebas Neue', cursive;
+//       display: flex;
+//       margin-left: 35%;
+//       letter-spacing: 2px;
+//       @include respond(phone) {
+//         font-size: 2rem;
+//         letter-spacing: 0px;
+//         line-height: 25px;
+//       }
+//       @include respond(tab-port) {
+//         font-size: 3rem;
+//         letter-spacing: 0px;
+//         line-height: 30px;
+//       }
+
+//       @include respond(tab-land) {
+//         font-size: 3.5rem;
+//         letter-spacing: 0px;
+//         line-height: 34px;
+//       }
+//     }
+
+//     &__parr {
+//       font-size: 2rem;
+//       color: rgb(255, 255, 255);
+//       width: 60%;
+//       margin-top: 10px;
+//       margin-left: 35%;
+//       font-family: 'Dosis', sans-serif;
+
+//       @include respond(tab-land) {
+//         font-size: 1.5rem;
+//         letter-spacing: 0px;
+//         line-height: 15px;
+//       }
+
+//       @include respond(tab-port) {
+//         font-size: 1.5rem;
+//         letter-spacing: 0px;
+//         line-height: 15px;
+//       }
+
+//       @include respond(phone) {
+//         font-size: 1rem;
+//         letter-spacing: 0px;
+//         line-height: 10px;
+//       }
+//     }
+
+//     &__button {
+//       font-size: 2rem;
+//       color: rgb(255, 255, 255);
+//       width: 20%;
+//       padding: 10px;
+//       margin-top: 40px;
+//       margin-left: 47%;
+//       background-color: rgb(157, 212, 47);
+//       cursor: pointer;
+//       border: none;
+//       font-family: 'Dosis', sans-serif;
+
+//       @include respond(phone) {
+//         font-size: 1.5rem;
+//         width: 56%;
+//         margin-left: 35%;
+//         margin-top: 20px;
+//       }
+
+//       @include respond(tab-port) {
+//         font-size: 1.5rem;
+//         width: 56%;
+//         margin-left: 35%;
+//         margin-top: 20px;
+//       }
+
+//       @include respond(tab-land) {
+//         font-size: 1.5rem;
+//         width: 56%;
+//         margin-left: 35%;
+//         margin-top: 20px;
+//       }
+//     }
+//   }
+//

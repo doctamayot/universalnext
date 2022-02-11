@@ -1,0 +1,135 @@
+.contfood {
+  background-color: rgb(245, 247, 247);
+  margin-top: 50px;
+  width: 100%;
+  height: auto;
+
+  &__icons {
+    width: 50px;
+    height: 50px;
+    color: rgb(157, 212, 47);
+    margin-top: 20px;
+  }
+  &__down {
+    border-top: 1px solid rgb(189, 186, 186);
+    height: auto;
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-around;
+    &__terms {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: -30px;
+      padding-bottom: 10px;
+      font-size: 1.2rem;
+      font-family: 'Bebas Neue', cursive;
+      color: rgb(116, 107, 107);
+      &__copy {
+        color: rgb(157, 212, 47);
+        font-size: 1.2rem;
+        text-align: center;
+        height: 30px;
+        width: 99%;
+      }
+    }
+  }
+  &__title {
+    font-size: 5rem;
+    font-family: 'Bebas Neue', cursive;
+    text-align: center;
+    padding-top: 50px;
+    color: rgb(157, 212, 47);
+  }
+
+  &__text {
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  &__maps {
+    margin: 10px auto;
+
+    &__map {
+      width: 95%;
+      height: 300px;
+      margin: 10px;
+      border: none;
+    }
+    &__title {
+      font-family: 'Dosis', sans-serif;
+      font-size: 3rem;
+      text-align: center;
+      width: 100%;
+    }
+    &__dir {
+      font-family: 'Dosis', sans-serif;
+      font-size: 2rem;
+      text-align: center;
+    }
+    @include respond(tab-port) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      text-align: center;
+      width: 50%;
+      margin: 20px auto;
+      &__title {
+        font-family: 'Dosis', sans-serif;
+        font-size: 3rem;
+        text-align: center;
+      }
+      &__dir {
+        font-family: 'Dosis', sans-serif;
+        font-size: 2rem;
+        text-align: center;
+      }
+    }
+  }
+}
+.formcontact {
+  text-align: center;
+
+  &__campo {
+    height: 50px;
+    width: 80%;
+    margin: 10px 10px;
+    padding-left: 10px;
+    border: 1px solid rgb(157, 212, 47);
+  }
+  &__button {
+    height: 35px;
+    width: 80%;
+    margin: 0 auto;
+    border: none;
+    background-color: rgb(157, 212, 47);
+    color: white;
+  }
+  @include respond(tab-port) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0px auto;
+    width: 50%;
+
+    &__button {
+      height: 50px;
+      margin: 20px 10px;
+    }
+
+    &__discampo:nth-child(1) {
+      margin-top: 20px;
+    }
+    &__discampo:nth-child(2) {
+      margin-top: 20px;
+    }
+    &__discampo:nth-child(3) {
+      grid-column: 1/3;
+    }
+    &__discampo:nth-child(4) {
+      grid-column: 1/3;
+      width: 40%;
+      justify-self: center;
+      margin-top: -2%;
+    }
+  }
+}

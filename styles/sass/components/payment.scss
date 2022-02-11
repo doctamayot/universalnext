@@ -1,0 +1,39 @@
+.payment {
+  padding: 20px;
+  font-family: 'Dosis', sans-serif;
+  font-size: 2rem;
+  &__discampo {
+    padding: 5px;
+    text-align: center;
+    &__cont {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    &__button {
+      width: 100%;
+      text-align: center;
+      @include respond(tab-land) {
+        width: 20%;
+        margin: 0 auto;
+      }
+    }
+    &__result {
+      text-align: center;
+      margin-top: 10px;
+    }
+    &__select {
+      &__image {
+        margin-top: -15px;
+        width: 10%;
+        @include respond(big-desktop) {
+          margin-left: -50px;
+        }
+      }
+      &__title {
+        margin-left: 10px;
+      }
+    }
+  }
+}

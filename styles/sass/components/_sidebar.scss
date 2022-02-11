@@ -1,0 +1,59 @@
+.sidebar {
+  @include respond(tab-port) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    width: 70%;
+    height: 100%;
+    transition: transform 3s ease-out;
+    background-color: #ddd;
+    padding: 4rem 2rem;
+  }
+
+  &__open {
+    transform: translateX(0);
+  }
+
+  &__closed {
+    transform: translateX(-100%);
+    display: none;
+  }
+
+  &__backdrop {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: #000;
+    opacity: 0.2;
+  }
+
+  &__list {
+    list-style: none;
+    font-size: 3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    font-family: 'Bebas Neue', cursive;
+
+    &__item {
+      display: flex;
+      margin-bottom: 1rem;
+      justify-content: center;
+    }
+  }
+
+  &__link {
+    display: block;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.25rem;
+    background-color: #777;
+    color: #333;
+  }
+}
