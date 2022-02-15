@@ -28,6 +28,7 @@ export default function ProductScreen(props) {
     //   window.alert('Sorry. Product is out of stock');
     //   return;
     // }
+    console.log(data);
     Cookies.set('clase', JSON.stringify(product._id));
     dispatch({ type: 'SAVE_CLASS', payload: product._id });
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
@@ -41,7 +42,9 @@ export default function ProductScreen(props) {
         `/api/admin/products/${product._id}/student`
       );
       setStudents(data);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
   useEffect(() => {
     fetchReviews();

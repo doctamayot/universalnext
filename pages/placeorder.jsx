@@ -83,6 +83,7 @@ function Placeorder() {
           },
         }
       );
+      console.log(data2);
       router.push(`/order/${data._id}`);
     } catch (err) {
       setLoading(false);
