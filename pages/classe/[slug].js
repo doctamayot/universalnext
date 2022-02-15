@@ -36,6 +36,10 @@ export default function ProductScreen(props) {
     router.push('/cart');
   };
 
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
   const fetchReviews = async () => {
     try {
       const { data } = await axios.get(
@@ -46,9 +50,6 @@ export default function ProductScreen(props) {
       console.log(err);
     }
   };
-  useEffect(() => {
-    fetchReviews();
-  }, []);
 
   return (
     <>

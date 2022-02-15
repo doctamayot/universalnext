@@ -72,7 +72,7 @@ function Placeorder() {
         icon: 'success',
         title: 'Success',
       });
-      console.log(data);
+
       setLoading(false);
       const { data2 } = await axios.put(
         `/api/admin/products/${claseid}/student`,
