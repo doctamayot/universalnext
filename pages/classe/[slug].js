@@ -24,6 +24,8 @@ export default function ProductScreen(props) {
     return <div>Class Not Found</div>;
   }
 
+  //prueba
+
   const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
