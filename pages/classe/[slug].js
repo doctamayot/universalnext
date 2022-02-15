@@ -16,6 +16,10 @@ export default function ProductScreen(props) {
   const { product } = props;
   const { userInfo } = state;
 
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
   if (!product) {
     return <div>Class Not Found</div>;
   }
@@ -35,10 +39,6 @@ export default function ProductScreen(props) {
 
     router.push('/cart');
   };
-
-  useEffect(() => {
-    fetchReviews();
-  }, []);
 
   const fetchReviews = async () => {
     try {
