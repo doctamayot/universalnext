@@ -195,6 +195,7 @@ const ProductEdit = ({ params }) => {
           countInStock,
           location,
           image: imagecloud ? imagecloud : nombre.image,
+          slug: productId,
         },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
@@ -206,7 +207,7 @@ const ProductEdit = ({ params }) => {
       });
 
       setValue(data);
-      console.log(nombre);
+      console.log(data);
     } catch (err) {
       Toast.fire({
         icon: 'error',

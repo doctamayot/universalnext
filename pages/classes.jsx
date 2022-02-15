@@ -6,6 +6,7 @@ import Product from '../models/Product';
 
 const classes = (props) => {
   const { products } = props;
+  console.log(products);
   return (
     <div className={styles.container}>
       <h2 className={styles.container__title}>Explore our Acting Classes</h2>
@@ -89,7 +90,7 @@ const classes = (props) => {
 
 export async function getServerSideProps() {
   await db.connect();
-  const products = await Product.find({}).lean();
+  const products = await Product.find({}, '-students').lean();
   await db.disconnect();
 
   return {

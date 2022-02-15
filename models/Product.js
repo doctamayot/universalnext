@@ -17,6 +17,14 @@ const productSchema = new mongoose.Schema(
     subtitle: { type: String, required: true },
     countInStock: { type: Number, required: true, default: 0 },
     //direccion: [{ type: String, required: true }],
+    students: [
+      {
+        user: { type: String },
+        celphone: { type: String },
+        desc: { type: String },
+        orderid: { type: String },
+      },
+    ],
   },
   {
     timestamps: true,

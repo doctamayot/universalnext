@@ -20,6 +20,8 @@ const initialState = {
   paymentMethod: Cookies.get('paymentMethod')
     ? Cookies.get('paymentMethod')
     : '',
+
+  classid: Cookies.get('clase') ? Cookies.get('clase') : '',
 };
 
 function reducer(state, action) {
@@ -58,6 +60,12 @@ function reducer(state, action) {
       return {
         ...state,
         cart: { ...state.cart, paymentMethod: action.payload },
+      };
+
+    case 'SAVE_CLASS':
+      return {
+        ...state,
+        cart: { ...state.cart, claseid: action.payload },
       };
     case 'CART_CLEAR':
       return { ...state, cart: { ...state.cart, cartItems: [] } };

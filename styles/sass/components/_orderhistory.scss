@@ -1,6 +1,6 @@
 .orderhistcontainer {
   margin-top: 20px;
-  height: 170vh;
+  height: auto;
 
   @include respond(tab-land) {
     display: flex;

@@ -24,6 +24,7 @@ export default function Payment() {
 
   const submitHandler = async (values) => {
     const { payment } = values;
+    console.log(payment);
 
     dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: payment });
     Cookies.set('paymentMethod', JSON.stringify(payment));

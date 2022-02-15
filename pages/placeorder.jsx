@@ -20,7 +20,8 @@ function Placeorder() {
 
   const {
     userInfo,
-    cart: { cartItems, shippingAddress, paymentMethod },
+
+    cart: { claseid, cartItems, shippingAddress, paymentMethod },
   } = state;
 
   useEffect(() => {
@@ -33,6 +34,7 @@ function Placeorder() {
   }, []);
 
   const totalPrice = cartItems.reduce((a, c) => a + c.quantity * c.price, 0);
+  const cantidad = cartItems.reduce((a, c) => a + c.quantity, 0);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -70,7 +72,17 @@ function Placeorder() {
         icon: 'success',
         title: 'Success',
       });
+      console.log(data);
       setLoading(false);
+      const { data2 } = await axios.put(
+        `/api/admin/products/${claseid}/student`,
+        { userInfo, shippingAddress, data, cantidad },
+        {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
       router.push(`/order/${data._id}`);
     } catch (err) {
       setLoading(false);
@@ -102,26 +114,26 @@ function Placeorder() {
               User:{' '}
             </span>
 
-            {userInfo.email}
+            {userInfo && userInfo.email}
           </p>
           <p className={styles.placeordercontainer__items}>
             <span className={styles.placeordercontainer__items__title}>
               Phone:{' '}
             </span>
 
-            {userInfo.celphone}
+            {userInfo && userInfo.celphone}
           </p>
           <p className={styles.placeordercontainer__items}>
             <span className={styles.placeordercontainer__items__title}>
               Student(s):{' '}
             </span>
-            {shippingAddress.student}
+            {shippingAddress && shippingAddress.student}
           </p>
           <p className={styles.placeordercontainer__items}>
             <span className={styles.placeordercontainer__items__title}>
               Age:{' '}
             </span>
-            {shippingAddress.age}
+            {shippingAddress && shippingAddress.age}
           </p>
 
           <div className={styles.placeordercontainer__hugo}>

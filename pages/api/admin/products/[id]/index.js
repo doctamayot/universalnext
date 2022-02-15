@@ -15,7 +15,6 @@ handler.get(async (req, res) => {
 export default handler;
 
 handler.put(async (req, res) => {
-  console.log(req.body);
   await db.connect();
   const product = await Product.findById(req.query.id);
   if (product) {
@@ -32,6 +31,7 @@ handler.put(async (req, res) => {
     product.countInStock = req.body.countInStock;
     product.image = req.body.image;
     product.location = req.body.location;
+    product.slug = req.body.slug;
 
     await product.save();
     await db.disconnect();

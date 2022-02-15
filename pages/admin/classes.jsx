@@ -254,8 +254,8 @@ const Classes = () => {
                       <StyledTableCell>NAME</StyledTableCell>
                       <StyledTableCell>PRICE</StyledTableCell>
                       <StyledTableCell>CATEGORY</StyledTableCell>
-                      <StyledTableCell>COUNT</StyledTableCell>
-                      <StyledTableCell>RATING</StyledTableCell>
+                      <StyledTableCell>PLACES</StyledTableCell>
+                      {/* <StyledTableCell>RATING</StyledTableCell> */}
                       <StyledTableCell>ACTION</StyledTableCell>
                     </TableRow>
                   </TableHead>
@@ -269,8 +269,13 @@ const Classes = () => {
                         <StyledTableCell>${order.price}</StyledTableCell>
                         <StyledTableCell>{order.category}</StyledTableCell>
                         <StyledTableCell>{order.countInStock}</StyledTableCell>
-                        <StyledTableCell>{order.rating}</StyledTableCell>
+                        {/* <StyledTableCell>{order.rating}</StyledTableCell> */}
                         <StyledTableCell>
+                          <NextLink href={`/classe/${order._id}`} passHref>
+                            <Button size="small" variant="contained">
+                              View
+                            </Button>
+                          </NextLink>{' '}
                           <NextLink
                             href={`/admin/classe/${order._id}`}
                             passHref

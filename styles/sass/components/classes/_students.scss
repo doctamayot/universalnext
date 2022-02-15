@@ -1,0 +1,27 @@
+.studentscont {
+  display: grid;
+  font-size: 2rem;
+  font-family: 'Dosis', sans-serif;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px;
+  align-self: center;
+  justify-items: center;
+  border-bottom: 1px solid;
+  &__campo1 {
+    grid-column: 1;
+    align-self: center;
+
+    &__title {
+      font-weight: bolder;
+    }
+  }
+
+  &__campo2 {
+    grid-column: 2;
+  }
+
+  &__campo3 {
+    grid-column: 3;
+    font-size: 1rem;
+  }
+}

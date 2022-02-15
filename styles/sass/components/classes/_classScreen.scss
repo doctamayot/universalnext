@@ -28,6 +28,7 @@
       &__starts {
         font-family: 'Dosis', sans-serif;
         font-size: 2rem;
+        margin-top: 40px;
 
         &__title {
           font-size: 2rem;
@@ -79,6 +80,13 @@
           &:hover {
             background-color: rgb(105, 104, 102);
           }
+        }
+        &__buttoncartout {
+          margin-left: 0px;
+          padding: 15px;
+          background-color: rgb(235, 25, 25);
+          border: none;
+          color: white;
         }
       }
     }

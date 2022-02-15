@@ -229,14 +229,14 @@ const Order = ({ params }) => {
               User:{' '}
             </span>
 
-            {userInfo.email}
+            {order.userInfo && order.userInfo.email}
           </p>
           <p className={styles.placeordercontainer__items}>
             <span className={styles.placeordercontainer__items__title}>
               Phone:{' '}
             </span>
 
-            {userInfo.celphone}
+            {order.userInfo && order.userInfo.celphone}
           </p>
           <p className={styles.placeordercontainer__items}>
             <span className={styles.placeordercontainer__items__title}>
@@ -299,7 +299,7 @@ const Order = ({ params }) => {
               <span className={styles.notpaid}>Not paid</span>
             )}
           </div>
-          {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+          {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
             <ListItem>
               {loadingDeliver && <CircularProgress />}
               <input
