@@ -2,7 +2,7 @@ import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import React, { useEffect, useContext, useReducer } from 'react';
+import React, { useEffect, useContext, useReducer, useState } from 'react';
 import Swal from 'sweetalert2';
 import {
   CircularProgress,
@@ -18,6 +18,31 @@ import { Store } from '../../utils/Store';
 import styles from '../../styles/sass/main.module.scss';
 import { NextSeo } from 'next-seo';
 import { withStyles } from '@material-ui/core/styles';
+import EditIcon from '@material-ui/icons/Edit';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import DeleteIcon from '@material-ui/icons/Delete';
+import teal from '@material-ui/core/colors/teal';
+import yellow from '@material-ui/core/colors/yellow';
+
+const ColorButton = withStyles((theme) => ({
+  root: {
+    color: '#fff',
+    backgroundColor: teal[700],
+    '&:hover': {
+      backgroundColor: teal[900],
+    },
+  },
+}))(Button);
+
+const YellowButton = withStyles((theme) => ({
+  root: {
+    color: '#fff',
+    backgroundColor: yellow[700],
+    '&:hover': {
+      backgroundColor: yellow[900],
+    },
+  },
+}))(Button);
 
 function reducer(state, action) {
   switch (action.type) {
@@ -41,12 +66,19 @@ function reducer(state, action) {
       return { ...state, loadingDelete: false };
     case 'DELETE_RESET':
       return { ...state, loadingDelete: false, successDelete: false };
+    case 'SMS_REQUEST':
+      return { ...state, loadingSms: true };
+    case 'SMS_SUCCESS':
+      return { ...state, loadingSms: false };
+    case 'SMS_FAIL':
+      return { ...state, loadingSms: false };
     default:
       state;
   }
 }
 
 const Classes = () => {
+  const [datos, setDatos] = useState({});
   const { state } = useContext(Store);
   const router = useRouter();
   const { userInfo } = state;
@@ -69,6 +101,7 @@ const Classes = () => {
         const { data } = await axios.get(`/api/admin/classes`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
+
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -176,6 +209,37 @@ const Classes = () => {
     },
   });
 
+  const smsHandler = async (productId) => {
+    // if (!window.confirm('Are you sure?')) {
+    //   return;
+    // }
+
+    try {
+      dispatch({ type: 'SMS_REQUEST' });
+      const { data } = await axios.post(
+        `/api/admin/products/${productId}/twilio`,
+        {},
+
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+
+      dispatch({ type: 'SMS_SUCCESS' });
+      Toast.fire({
+        icon: 'success',
+        title: 'Message sent successfully',
+      });
+      //router.push(`/admin/classe/${data.product._id}`);
+    } catch (err) {
+      dispatch({ type: 'SMS_FAIL' });
+      Toast.fire({
+        icon: 'error',
+        title: getError(err),
+      });
+    }
+  };
+
   return (
     <>
       <NextSeo
@@ -272,24 +336,39 @@ const Classes = () => {
                         {/* <StyledTableCell>{order.rating}</StyledTableCell> */}
                         <StyledTableCell>
                           <NextLink href={`/classe/${order._id}`} passHref>
-                            <Button size="small" variant="contained">
+                            <YellowButton
+                              startIcon={<EditIcon />}
+                              variant="contained"
+                            >
                               View
-                            </Button>
+                            </YellowButton>
                           </NextLink>{' '}
                           <NextLink
                             href={`/admin/classe/${order._id}`}
                             passHref
                           >
-                            <Button size="small" variant="contained">
+                            <ColorButton
+                              startIcon={<EditIcon />}
+                              variant="contained"
+                            >
                               Edit
-                            </Button>
+                            </ColorButton>
                           </NextLink>{' '}
                           <Button
-                            size="small"
+                            color="secondary"
+                            startIcon={<DeleteIcon />}
                             variant="contained"
                             onClick={() => deleteHandler(order._id)}
                           >
                             Delete
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            startIcon={<CloudUploadIcon />}
+                            onClick={() => smsHandler(order._id)}
+                          >
+                            sms
                           </Button>
                         </StyledTableCell>
                       </StyledTableRow>

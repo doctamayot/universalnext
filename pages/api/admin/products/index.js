@@ -15,10 +15,10 @@ handler.get(async (req, res) => {
 
 handler.post(async (req, res) => {
   await db.connect();
-  console.log(req);
+
   const newProduct = new Product({
     name: 'ACTING FOR RUGRATS',
-    slug: 'sample-slug-' + Math.random(),
+    slug: Math.random(),
     category: 'Kids',
     description: 'descripcion',
     age: '4-5-6',

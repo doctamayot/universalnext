@@ -23,7 +23,7 @@ const Navbar = ({ toggleSidebar }) => {
 
   const panelClickHandler = () => {
     setAnchorEl(!anchorEl);
-    if (userInfo.isAdmin) router.push('/admin/orders');
+    if (userInfo.isAdmin) router.push('/admin/classes');
     else router.push('/order_history');
   };
 
