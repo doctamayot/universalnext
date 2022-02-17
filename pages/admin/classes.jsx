@@ -78,7 +78,6 @@ function reducer(state, action) {
 }
 
 const Classes = () => {
-  const [datos, setDatos] = useState({});
   const { state } = useContext(Store);
   const router = useRouter();
   const { userInfo } = state;
@@ -218,7 +217,7 @@ const Classes = () => {
       dispatch({ type: 'SMS_REQUEST' });
       const { data } = await axios.post(
         `/api/admin/products/${productId}/twilio`,
-        {},
+        { data },
 
         {
           headers: { authorization: `Bearer ${userInfo.token}` },
