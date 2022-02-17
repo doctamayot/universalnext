@@ -23,6 +23,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteIcon from '@material-ui/icons/Delete';
 import teal from '@material-ui/core/colors/teal';
 import yellow from '@material-ui/core/colors/yellow';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 const ColorButton = withStyles(() => ({
   root: {
@@ -290,12 +291,15 @@ const Classes = () => {
         <div className={styles.orderhistcontainer__right}>
           <h4 className={styles.profilefield__title}>Classes Admin</h4>
           <div className={styles.profilefield__create}>
-            <button
-              className={styles.profilefield__create__button}
+            <Button
+              //className={styles.profilefield__create__button}
               onClick={createHandler}
+              variant="contained"
+              color="primary"
+              startIcon={<AddBoxIcon />}
             >
               Create
-            </button>
+            </Button>
           </div>
           {loading ? (
             <div className={styles.spinner}>
