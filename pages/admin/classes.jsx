@@ -131,9 +131,9 @@ const Classes = () => {
     }
   };
   const deleteHandler = async (productId) => {
-    if (!window.confirm('Are you sure?')) {
-      return;
-    }
+    // if (!window.confirm('Are you sure?')) {
+    //   return;
+    // }
     try {
       dispatch({ type: 'DELETE_REQUEST' });
       Swal.fire({

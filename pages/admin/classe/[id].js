@@ -10,6 +10,7 @@ import { Store } from '../../../utils/Store';
 import styles from '../../../styles/sass/main.module.scss';
 import { Formik, Form, Field } from 'formik';
 import { NextSeo } from 'next-seo';
+import Image from 'next/image';
 import * as Yup from 'yup';
 
 function reducer(state, action) {
@@ -207,7 +208,7 @@ const ProductEdit = ({ params }) => {
       });
 
       setValue(data);
-      console.log(data);
+      router.push('/admin/classes');
     } catch (err) {
       Toast.fire({
         icon: 'error',
@@ -220,7 +221,7 @@ const ProductEdit = ({ params }) => {
     toast: true,
     position: 'center',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -268,10 +269,26 @@ const ProductEdit = ({ params }) => {
         </div>
         <div className={styles.orderhistcontainer__right}>
           <h4 className={styles.profilefield__title}>Edit Class</h4>
-          <Button variant="contained" component="label">
-            Upload File
-            <input type="file" onChange={uploadHandler} hidden />
-          </Button>
+          <div className={styles.botonimagen}>
+            <Image
+              src={!imagecloud ? '/img/kids2.jpg' : imagecloud}
+              alt="imagen universal"
+              width={610}
+              height={489}
+            />
+            <div className={styles.botonimagen__boton}>
+              <Button variant="contained" component="label">
+                Upload Image
+                <input type="file" onChange={uploadHandler} hidden />
+              </Button>
+              <div></div>
+              {loadingUpload && (
+                <div className={styles.spinner}>
+                  <CircularProgress />
+                </div>
+              )}
+            </div>
+          </div>
 
           <Formik
             enableReinitialize={true}
@@ -527,11 +544,6 @@ const ProductEdit = ({ params }) => {
                     />
                   </div>
                   {loadingUpdate && (
-                    <div className={styles.spinner}>
-                      <CircularProgress />
-                    </div>
-                  )}
-                  {loadingUpload && (
                     <div className={styles.spinner}>
                       <CircularProgress />
                     </div>
