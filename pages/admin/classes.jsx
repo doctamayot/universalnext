@@ -2,7 +2,7 @@ import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import React, { useEffect, useContext, useReducer, useState } from 'react';
+import React, { useEffect, useContext, useReducer } from 'react';
 import Swal from 'sweetalert2';
 import {
   CircularProgress,
@@ -24,7 +24,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import teal from '@material-ui/core/colors/teal';
 import yellow from '@material-ui/core/colors/yellow';
 
-const ColorButton = withStyles((theme) => ({
+const ColorButton = withStyles(() => ({
   root: {
     color: '#fff',
     backgroundColor: teal[700],
@@ -34,7 +34,7 @@ const ColorButton = withStyles((theme) => ({
   },
 }))(Button);
 
-const YellowButton = withStyles((theme) => ({
+const YellowButton = withStyles(() => ({
   root: {
     color: '#fff',
     backgroundColor: yellow[700],
