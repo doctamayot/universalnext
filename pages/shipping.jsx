@@ -22,6 +22,11 @@ export default function Shipping() {
       .max(2, 'Age is too large')
       .required('Age is required')
       .matches(/^[0-9]+$/, 'Must be only digits'),
+    desc: Yup.string()
+      .min(10, 'Description too short')
+      .max(125, 'Description too large')
+      .required('Description is required')
+      .matches(/^[aA-zZ\s,.,]+$/, 'Only alphabets are allowed for this field '),
   });
 
   const router = useRouter();
@@ -114,7 +119,7 @@ export default function Shipping() {
                   className={styles.logincontact__discampo__label}
                   htmlFor="desc"
                 >
-                  Tell us something about the student
+                  Tell us something about the student(short)
                 </label>
                 <Field
                   as="textarea"

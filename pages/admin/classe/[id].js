@@ -100,9 +100,9 @@ const ProductEdit = ({ params }) => {
       .required('Duration is required'),
     price: Yup.string()
       .min(1, 'Price is too short')
-      .max(4, 'Price is too large')
+      .max(6, 'Price is too large')
       .required('Price is required')
-      .matches(/^[0-9]+$/, 'Must be only digits'),
+      .matches(/^[0-9,.]+$/, 'Must be only digits'),
     subtitle: Yup.string()
       .min(3, 'Subtitle too short')
       .max(100, 'Subtitle too large')

@@ -178,6 +178,7 @@ const Order = ({ params }) => {
         icon: 'success',
         title: 'Class Deliver Success',
       });
+      router.push('/admin/orders');
     } catch (err) {
       dispatch({ type: 'DELIVER_FAIL', payload: getError(err) });
       Toast.fire({
@@ -288,8 +289,7 @@ const Order = ({ params }) => {
 
         <div className={styles.placeordercontainer__pilas}>
           <div className={styles.placeordercontainer__total}>
-            Total:({cartItems.reduce((a, c) => a + c.quantity, 0)} classes) : $
-            {totalPrice} with {paymentMethod}
+            Total:${totalPrice} with {paymentMethod}
           </div>
           <div className={styles.placeordercontainer__items}>
             Status:{' '}
@@ -304,7 +304,7 @@ const Order = ({ params }) => {
               {loadingDeliver && <CircularProgress />}
               <input
                 type="submit"
-                value="Update Class Deliver"
+                value="Update Taken"
                 className={styles.logincontact__button}
                 onClick={deliverOrderHandler}
               />

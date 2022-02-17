@@ -100,10 +100,7 @@ export default function ProductScreen(props) {
                   <span className={styles.studentscont__campo2}>
                     {x.celphone}
                   </span>{' '}
-                  <span className={styles.studentscont__campo3}>
-                    Is the best student, Is the best student, Is the best
-                    student, Is the best student, Is the best student
-                  </span>{' '}
+                  <span className={styles.studentscont__campo3}>{x.desc}</span>{' '}
                 </div>
               ))}
 

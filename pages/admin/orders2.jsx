@@ -138,6 +138,15 @@ function AdminDashboard() {
               ) : (
                 <>
                   <TableHead>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10, 25]}
+                      component="div"
+                      // count={rows.length}
+                      // rowsPerPage={rowsPerPage}
+                      // page={page}
+                      // onPageChange={handleChangePage}
+                      // onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
                     <TableRow>
                       <StyledTableCell key="id">ID</StyledTableCell>
                       <StyledTableCell>USER</StyledTableCell>
@@ -194,15 +203,6 @@ function AdminDashboard() {
                       </StyledTableRow>
                     ))}
                   </TableBody>
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    // count={rows.length}
-                    // rowsPerPage={rowsPerPage}
-                    // page={page}
-                    // onPageChange={handleChangePage}
-                    // onRowsPerPageChange={handleChangeRowsPerPage}
-                  />
                 </>
               )}
             </Table>
