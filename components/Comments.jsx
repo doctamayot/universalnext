@@ -5,9 +5,7 @@ import styles from '../styles/sass/main.module.scss';
 import Image from 'next/image';
 
 const comments = () => {
-  const antonella = `"Just wanted to thank you for the self tape! She got rave reviews and
-    it opened some awesome doors for my small fry . She keeps asking for
-    the acting classes. You guys are the best "`;
+  const antonella = `What a great class for Antonella! Just amazing!!`;
   const alexa =
     '"OMG I love the acting class!! It is soooo much fun!! It makes me soooo happy!!"';
   const daysi =
