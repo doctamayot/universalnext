@@ -250,7 +250,7 @@ function Profile() {
                         Password
                       </label>
                       <Field
-                        type="text"
+                        type="password"
                         className={styles.profilefield__campo}
                         placeholder="Password"
                         id="password"
@@ -265,7 +265,7 @@ function Profile() {
                         className={styles.profilefield__label}
                         htmlFor="confirmpassword"
                       >
-                        Password
+                        Confirm Password
                       </label>
                       <Field
                         type="text"

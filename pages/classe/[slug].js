@@ -106,9 +106,8 @@ export default function ProductScreen(props) {
 
             <p className={styles.classscreen__right__sec1__starts}>
               <span className={styles.classscreen__right__sec1__starts__title}>
-                Starts:{' '}
+                Dates: {product.days}
               </span>
-              {product.days}
             </p>
 
             <p className={styles.classscreen__right__sec1__price}>
@@ -168,10 +167,13 @@ export default function ProductScreen(props) {
           <p className={styles.classscreen__right__sec2__teach}>
             {product.teacher}
           </p>
+          <p className={styles.classscreen__right__sec1__shedule}>
+            {product.shedule}
+          </p>
 
           <div className={styles.classscreen__right__sec2__table}>
             <p className={styles.classscreen__right__sec2__table__fec}>
-              {product.days}
+              {product.age} years
             </p>
           </div>
           <p className={styles.classscreen__right__sec2__dura}>

@@ -13,6 +13,10 @@
   &__right {
     padding: 20px;
     &__sec1 {
+      &__shedule {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 2rem;
+      }
       &__title {
         font-family: 'Bebas Neue', cursive;
         font-size: 5rem;
@@ -33,6 +37,7 @@
         &__title {
           font-size: 2rem;
           color: #000;
+          font-family: 'Bebas Neue', cursive;
         }
       }
       &__adv1 {

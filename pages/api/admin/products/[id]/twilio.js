@@ -29,7 +29,7 @@ handler.post(async (req, res) => {
       twilio.messages
         .create({
           to: `57${cel.celphone}`,
-          body: 'Hello, don`t forget that tomorrow you or your son will have a class at Universal Casting',
+          body: `Hello, don´t forget that ${product.shedule}, the student ${cel.user} will have the class ${product.name} in the ${product.location} studio of Universal Casting  `,
           from: '3056778471',
         })
         .then((notification) => {

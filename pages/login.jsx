@@ -111,7 +111,7 @@ const Login = () => {
                   Password
                 </label>
                 <Field
-                  type="text"
+                  type="password"
                   className={styles.logincontact__campo}
                   placeholder="Password"
                   id="password"

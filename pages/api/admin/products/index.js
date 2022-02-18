@@ -29,7 +29,7 @@ handler.post(async (req, res) => {
     price: 150,
     subtitle: 'Acting Classes for Kids & Adults that deliver results!',
     countInStock: 5,
-    location: 'Miami',
+    location: '',
     image: '/img/kids2.jpg',
   });
 

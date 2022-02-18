@@ -65,9 +65,7 @@ const ProductEdit = ({ params }) => {
         'Only alphabets are allowed for this field '
       ),
     category: Yup.string()
-      .min(3, 'Name too short')
-      .max(50, 'Name too large')
-      .required('Name is required'),
+    .required('Category is required'),
     //.matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
 
     age: Yup.string()
@@ -76,9 +74,9 @@ const ProductEdit = ({ params }) => {
       .required('Age is required')
       .matches(/^[0-9,-]+$/, 'Must be only digits'),
     teacher: Yup.string()
-      .min(3, 'Name too short')
-      .max(30, 'Name too large')
-      .required('Name is required')
+      .min(3, 'Teacher too short')
+      .max(30, 'Teacher too large')
+      .required('Teacher is required')
       .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
 
     shedule: Yup.string()
@@ -96,9 +94,9 @@ const ProductEdit = ({ params }) => {
       .max(50, 'Duration too large')
       .required('Duration is required'),
     location: Yup.string()
-      .min(3, 'Duration too short')
-      .max(50, 'Duration too large')
-      .required('Duration is required'),
+      .min(3, 'Location too short')
+      .max(50, 'Location too large')
+      .required('Location is required'),
     price: Yup.string()
       .min(1, 'Price is too short')
       .max(6, 'Price is too large')
@@ -324,12 +322,23 @@ const ProductEdit = ({ params }) => {
                       Location
                     </label>
                     <Field
+                      as="select"
+                      id="location"
+                      name="location"
+                      placeholder="Location"
+                      className={styles.profilefield__campo}
+                    >
+                      <option value="" label="Select a location" />
+                      <option value="miami" label="Miami" />
+                      <option value="fort laurdedale" label="Fort Laurdedale" />
+                    </Field>
+                    {/* <Field
                       type="text"
                       className={styles.profilefield__campo}
                       placeholder="Location"
                       id="location"
                       name="location"
-                    />
+                    /> */}
                     {errors.location && touched.location ? (
                       <p className={styles.formerror}>{errors.location}</p>
                     ) : null}
@@ -367,6 +376,7 @@ const ProductEdit = ({ params }) => {
                       id="subtitle"
                       name="subtitle"
                     />
+
                     {errors.subtitle && touched.subtitle ? (
                       <p className={styles.formerror}>{errors.subtitle}</p>
                     ) : null}
@@ -380,12 +390,18 @@ const ProductEdit = ({ params }) => {
                       Category
                     </label>
                     <Field
+                      as="select"
                       type="text"
                       className={styles.profilefield__campo}
                       placeholder="Category"
                       id="category"
                       name="category"
-                    />
+                    >
+                      <option value="" label="Select a category" />
+                      <option value="kids" label="Kids" />
+                      <option value="teens" label="Teens" />
+                      <option value="adults" label="Adults" />
+                    </Field>
                     {errors.category && touched.category ? (
                       <p className={styles.formerror}>{errors.category}</p>
                     ) : null}

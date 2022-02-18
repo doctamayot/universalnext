@@ -198,7 +198,7 @@ const Register = () => {
                   Password
                 </label>
                 <Field
-                  type="text"
+                  type="password"
                   className={styles.logincontact__campo}
                   placeholder="Password"
                   id="password"
@@ -216,9 +216,9 @@ const Register = () => {
                   Password
                 </label>
                 <Field
-                  type="text"
+                  type="password"
                   className={styles.logincontact__campo}
-                  placeholder="confirmPassword"
+                  placeholder="Confirm Password"
                   id="confirmpassword"
                   name="confirmpassword"
                 />
