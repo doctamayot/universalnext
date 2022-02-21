@@ -1,8 +1,9 @@
 .classscreen {
-  @include respond(tab-land) {
+  @include respond(tab-port) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    height: 100vh;
   }
 
   &__left {
@@ -12,6 +13,11 @@
 
   &__right {
     padding: 20px;
+    &__desc {
+      font-family: 'Dosis', sans-serif;
+      font-size: 2rem;
+      margin-top: 20px;
+    }
     &__sec1 {
       &__shedule {
         font-family: 'Bebas Neue', cursive;
@@ -125,4 +131,5 @@
       }
     }
   }
+  height: auto;
 }

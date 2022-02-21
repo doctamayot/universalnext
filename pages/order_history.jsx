@@ -2,40 +2,46 @@ import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import React, { useEffect, useContext, useReducer } from 'react';
+import React, { useEffect, useContext, useReducer, useState } from 'react';
 import {
   CircularProgress,
   Button,
-  Table,
+  TextField,
   TableBody,
   TableRow,
   TableCell,
-  TableHead,
+  withStyles,
 } from '@material-ui/core';
 import { getError } from '../utils/error';
 import { Store } from '../utils/Store';
 import styles from '../styles/sass/main.module.scss';
-import { withStyles } from '@material-ui/core/styles';
+import { Search } from '@material-ui/icons';
+import teal from '@material-ui/core/colors/teal';
+import EditIcon from '@material-ui/icons/Edit';
+import useTable from '../components/useTable';
 import moment from 'moment';
 import { NextSeo } from 'next-seo';
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
+const headCells = [
+  { id: 'orderId', label: 'Order Id' },
+  { id: 'class', label: 'Class' },
+  { id: 'fullName', label: 'Student' },
+  { id: 'createdAt', label: 'Order Date' },
+  { id: 'price', label: 'Price' },
+  { id: 'paid', label: 'Paid' },
+  { id: 'taken', label: 'Class Taken' },
+  { id: 'actions', label: 'Actions' },
+];
 
-const StyledTableRow = withStyles((theme) => ({
+const ColorButton = withStyles(() => ({
   root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+    color: '#fff',
+    backgroundColor: teal[700],
+    '&:hover': {
+      backgroundColor: teal[900],
     },
   },
-}))(TableRow);
+}))(Button);
 
 function reducer(state, action) {
   switch (action.type) {
@@ -51,6 +57,11 @@ function reducer(state, action) {
 }
 
 function OrderHistory() {
+  const [filterFn, setFilterFn] = useState({
+    fn: (orders) => {
+      return orders;
+    },
+  });
   const { state } = useContext(Store);
   const router = useRouter();
 
@@ -79,6 +90,22 @@ function OrderHistory() {
     };
     fetchOrders();
   }, []);
+
+  const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
+    useTable(orders, headCells, filterFn);
+
+  const handleSearch = (e) => {
+    let target = e.target;
+    setFilterFn({
+      fn: (orders) => {
+        if (target.value == '') return orders;
+        else
+          return orders.filter((x) =>
+            x.orderItems[0].name.toLowerCase().includes(target.value)
+          );
+      },
+    });
+  };
 
   return (
     <>
@@ -119,60 +146,67 @@ function OrderHistory() {
           ) : error ? (
             <div>{error}</div>
           ) : (
-            <Table>
+            <>
               {orders.length === 0 ? (
                 <div className={styles.nohaybookings}>
                   You have not made bookings
                 </div>
               ) : (
                 <>
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell>ID</StyledTableCell>
-                      <StyledTableCell>DATE</StyledTableCell>
-                      <StyledTableCell>STUDENT</StyledTableCell>
-                      <StyledTableCell>TOTAL</StyledTableCell>
-                      <StyledTableCell>PAID</StyledTableCell>
-                      <StyledTableCell>DELIVERED</StyledTableCell>
-                      <StyledTableCell>ACTION</StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {orders.map((order) => (
-                      <StyledTableRow key={order._id}>
-                        <StyledTableCell>
-                          {order._id.substring(20, 24)}
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          {moment(order.createdAt).format('lll')}
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          {order.shippingAddress.student}
-                        </StyledTableCell>
-                        <StyledTableCell>{order.totalPrice}</StyledTableCell>
-                        <StyledTableCell>
-                          {' '}
-                          {order.isPaid
-                            ? `paid at ${moment(order.paidAt).format('lll')}`
-                            : 'not paid'}
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          {order.isDelivered
-                            ? `delivered at ${order.deliveredAt}`
-                            : 'not delivered'}
-                        </StyledTableCell>
+                  <div className={styles.searchbox}>
+                    <Search
+                      className={styles.searchbox__icon}
+                      fontSize="large"
+                    />
+                    <TextField
+                      onChange={handleSearch}
+                      placeholder="Search By Class"
+                      className={styles.searchbox__input}
+                    />
+                  </div>
+                  <TblContainer>
+                    <TblHead />
+                    <TableBody>
+                      {recordsAfterPagingAndSorting().map((order) => (
+                        <TableRow key={order._id}>
+                          <TableCell>{order._id.substring(20, 24)}</TableCell>
+                          <TableCell>{order.orderItems[0].name}</TableCell>
 
-                        <NextLink href={`/order/${order._id}`} passHref>
-                          <StyledTableCell>
-                            <Button variant="contained">Details</Button>{' '}
-                          </StyledTableCell>
-                        </NextLink>
-                      </StyledTableRow>
-                    ))}
-                  </TableBody>
+                          <TableCell>{order.shippingAddress.student}</TableCell>
+                          <TableCell>
+                            {moment(order.createdAt).format('lll')}
+                          </TableCell>
+                          <TableCell>{order.totalPrice}</TableCell>
+                          <TableCell>
+                            {' '}
+                            {order.isPaid
+                              ? `paid at ${moment(order.paidAt).format('lll')}`
+                              : 'not paid'}
+                          </TableCell>
+                          <TableCell>
+                            {order.isDelivered
+                              ? `delivered at ${order.deliveredAt}`
+                              : 'not delivered'}
+                          </TableCell>
+
+                          <NextLink href={`/order/${order._id}`} passHref>
+                            <TableCell>
+                              <ColorButton
+                                startIcon={<EditIcon />}
+                                variant="contained"
+                              >
+                                Detail
+                              </ColorButton>
+                            </TableCell>
+                          </NextLink>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </TblContainer>
+                  <TblPagination />
                 </>
               )}
-            </Table>
+            </>
           )}
         </div>
       </div>

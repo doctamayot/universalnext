@@ -114,12 +114,27 @@ const Navbar = ({ toggleSidebar }) => {
         </div>
 
         {userInfo ? (
-          <p
-            className={styles.navbar__list__item__user}
-            onClick={loginClickHandler}
-          >
-            {userInfo.firstname}
-          </p>
+          <>
+            <p
+              className={styles.navbar__list__item__user}
+              onMouseOver={loginClickHandler}
+            >
+              {userInfo.firstname}
+            </p>
+
+            <li
+              className={styles.navbar__list__item__user__menu}
+              onClick={panelClickHandler}
+            >
+              Panel
+            </li>
+            <li
+              className={styles.navbar__list__item__user__menu2}
+              onClick={logoutClickHandler}
+            >
+              Logout
+            </li>
+          </>
         ) : (
           <li className={styles.navbar__list__item}>
             <Link href="/login">
@@ -131,7 +146,7 @@ const Navbar = ({ toggleSidebar }) => {
           </li>
         )}
 
-        {userInfo && anchorEl ? (
+        {/* {userInfo && anchorEl ? (
           <>
             <li
               className={styles.navbar__list__item__user__menu}
@@ -146,7 +161,7 @@ const Navbar = ({ toggleSidebar }) => {
               Logout
             </li>
           </>
-        ) : null}
+        ) : null} */}
 
         <div className={styles.navbar__button} onClick={toggleSidebar}>
           <MdOutlineMenu size="3rem" color="black" />

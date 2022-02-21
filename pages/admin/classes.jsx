@@ -2,16 +2,15 @@ import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import React, { useEffect, useContext, useReducer } from 'react';
+import React, { useEffect, useContext, useReducer, useState } from 'react';
 import Swal from 'sweetalert2';
 import {
   CircularProgress,
   Button,
-  Table,
-  TableHead,
   TableRow,
   TableCell,
   TableBody,
+  TextField,
 } from '@material-ui/core';
 import { getError } from '../../utils/error';
 import { Store } from '../../utils/Store';
@@ -24,6 +23,19 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import teal from '@material-ui/core/colors/teal';
 import yellow from '@material-ui/core/colors/yellow';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import { Search } from '@material-ui/icons';
+
+import useTable from '../../components/useTable';
+
+const headCells = [
+  { id: 'orderId', label: 'Order Id' },
+  { id: 'class', label: 'Class' },
+  { id: 'price', label: 'Price' },
+  { id: 'category', label: 'Category' },
+
+  { id: 'places', label: 'Places' },
+  { id: 'actions', label: 'Actions' },
+];
 
 const ColorButton = withStyles(() => ({
   root: {
@@ -82,6 +94,11 @@ const Classes = () => {
   const { state } = useContext(Store);
   const router = useRouter();
   const { userInfo } = state;
+  const [filterFn, setFilterFn] = useState({
+    fn: (orders) => {
+      return orders;
+    },
+  });
 
   const [
     { loading, error, products, loadingCreate, successDelete, loadingDelete },
@@ -240,6 +257,22 @@ const Classes = () => {
     }
   };
 
+  const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
+    useTable(products, headCells, filterFn);
+
+  const handleSearch = (e) => {
+    let target = e.target;
+    setFilterFn({
+      fn: (orders) => {
+        if (target.value == '') return orders;
+        else
+          return orders.filter((x) =>
+            x.name.toLowerCase().includes(target.value)
+          );
+      },
+    });
+  };
+
   return (
     <>
       <NextSeo
@@ -308,78 +341,84 @@ const Classes = () => {
           ) : error ? (
             <div>{error}</div>
           ) : (
-            <Table>
+            <>
               {products.length === 0 ? (
                 <div className={styles.nohaybookings}>
                   You have not made classes
                 </div>
               ) : (
                 <>
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell key="id">ID</StyledTableCell>
-                      <StyledTableCell>NAME</StyledTableCell>
-                      <StyledTableCell>PRICE</StyledTableCell>
-                      <StyledTableCell>CATEGORY</StyledTableCell>
-                      <StyledTableCell>PLACES</StyledTableCell>
-                      {/* <StyledTableCell>RATING</StyledTableCell> */}
-                      <StyledTableCell>ACTION</StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {products.map((order) => (
-                      <StyledTableRow key={order._id}>
-                        <StyledTableCell>
-                          {order._id.substring(20, 24)}
-                        </StyledTableCell>
-                        <StyledTableCell>{order.name}</StyledTableCell>
-                        <StyledTableCell>${order.price}</StyledTableCell>
-                        <StyledTableCell>{order.category}</StyledTableCell>
-                        <StyledTableCell>{order.countInStock}</StyledTableCell>
-                        {/* <StyledTableCell>{order.rating}</StyledTableCell> */}
-                        <StyledTableCell>
-                          <NextLink href={`/classe/${order._id}`} passHref>
-                            <YellowButton
-                              startIcon={<EditIcon />}
-                              variant="contained"
+                  <div className={styles.searchbox}>
+                    <Search
+                      className={styles.searchbox__icon}
+                      fontSize="large"
+                    />
+                    <TextField
+                      onChange={handleSearch}
+                      placeholder="Search By Student"
+                      className={styles.searchbox__input}
+                    />
+                  </div>
+                  <TblContainer>
+                    <TblHead />
+                    <TableBody>
+                      {recordsAfterPagingAndSorting().map((order) => (
+                        <StyledTableRow key={order._id}>
+                          <StyledTableCell>
+                            {order._id.substring(20, 24)}
+                          </StyledTableCell>
+                          <StyledTableCell>{order.name}</StyledTableCell>
+                          <StyledTableCell>${order.price}</StyledTableCell>
+                          <StyledTableCell>{order.category}</StyledTableCell>
+                          <StyledTableCell>
+                            {order.countInStock}
+                          </StyledTableCell>
+                          {/* <StyledTableCell>{order.rating}</StyledTableCell> */}
+                          <StyledTableCell>
+                            <NextLink href={`/classe/${order._id}`} passHref>
+                              <YellowButton
+                                startIcon={<EditIcon />}
+                                variant="contained"
+                              >
+                                View
+                              </YellowButton>
+                            </NextLink>{' '}
+                            <NextLink
+                              href={`/admin/classe/${order._id}`}
+                              passHref
                             >
-                              View
-                            </YellowButton>
-                          </NextLink>{' '}
-                          <NextLink
-                            href={`/admin/classe/${order._id}`}
-                            passHref
-                          >
-                            <ColorButton
-                              startIcon={<EditIcon />}
+                              <ColorButton
+                                startIcon={<EditIcon />}
+                                variant="contained"
+                              >
+                                Edit
+                              </ColorButton>
+                            </NextLink>{' '}
+                            <Button
+                              color="secondary"
+                              startIcon={<DeleteIcon />}
                               variant="contained"
+                              onClick={() => deleteHandler(order._id)}
                             >
-                              Edit
-                            </ColorButton>
-                          </NextLink>{' '}
-                          <Button
-                            color="secondary"
-                            startIcon={<DeleteIcon />}
-                            variant="contained"
-                            onClick={() => deleteHandler(order._id)}
-                          >
-                            Delete
-                          </Button>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<CloudUploadIcon />}
-                            onClick={() => smsHandler(order._id)}
-                          >
-                            sms
-                          </Button>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                  </TableBody>
+                              Delete
+                            </Button>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              startIcon={<CloudUploadIcon />}
+                              onClick={() => smsHandler(order._id)}
+                            >
+                              sms
+                            </Button>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </TblContainer>
+                  <TblPagination />
                 </>
               )}
-            </Table>
+            </>
           )}
         </div>
       </div>

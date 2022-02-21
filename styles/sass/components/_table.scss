@@ -1,0 +1,15 @@
+.searchbox {
+  padding: 0px;
+  font-family: 'Dosis', sans-serif;
+  margin-bottom: -10px;
+  margin-top: 10px;
+  &__icon {
+    color: rgb(111, 109, 245);
+    margin: 5px;
+    width: 1px;
+  }
+
+  &__input {
+    width: 20%;
+  }
+}

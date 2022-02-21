@@ -122,13 +122,17 @@ function Profile() {
               </a>
             </NextLink>
           </div>
-          <div className={styles.orderhistcontainer__left__menu}>
-            <NextLink href="/admin/classes" passHref>
-              <a>
-                <div className={styles.profilelink}>Admin Classes</div>
-              </a>
-            </NextLink>
-          </div>
+
+          {userInfo && userInfo.isAdmin ? (
+            <div className={styles.orderhistcontainer__left__menu}>
+              <NextLink href="/admin/classes" passHref>
+                <a>
+                  <div className={styles.profilelink}>Admin Classes</div>
+                </a>
+              </NextLink>
+            </div>
+          ) : null}
+
           <div className={styles.orderhistcontainer__left__menu}>
             <NextLink
               href={

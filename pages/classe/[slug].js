@@ -8,13 +8,31 @@ import { NextSeo } from 'next-seo';
 import Product from '../../models/Product';
 import db from '../../utils/db';
 import { useRouter } from 'next/router';
+import NextLink from 'next/link';
+import { TextField, TableBody, TableRow, TableCell } from '@material-ui/core';
+import useTable from '../../components/useTable';
+import { Search } from '@material-ui/icons';
+
+const headCells = [
+  { id: 'student', label: 'Student' },
+  { id: 'celphone', label: 'celphone' },
+  { id: 'desc', label: 'description' },
+];
 
 export default function ProductScreen(props) {
+  const [filterFn, setFilterFn] = useState({
+    fn: (orders) => {
+      return orders;
+    },
+  });
   const [students, setStudents] = useState([]);
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
   const { product } = props;
   const { userInfo } = state;
+
+  const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
+    useTable(students, headCells, filterFn);
 
   useEffect(() => {
     fetchReviews();
@@ -35,6 +53,7 @@ export default function ProductScreen(props) {
     //   return;
     // }
     console.log(data);
+
     Cookies.set('clase', JSON.stringify(product._id));
     dispatch({ type: 'SAVE_CLASS', payload: product._id });
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
@@ -53,6 +72,19 @@ export default function ProductScreen(props) {
     }
   };
 
+  const handleSearch = (e) => {
+    let target = e.target;
+    setFilterFn({
+      fn: (students) => {
+        if (target.value == '') return students;
+        else
+          return students.filter((x) =>
+            x.user.toLowerCase().includes(target.value)
+          );
+      },
+    });
+  };
+
   return (
     <>
       <NextSeo
@@ -62,6 +94,9 @@ export default function ProductScreen(props) {
       <div className={styles.classscreen}>
         <div className={styles.classscreen__left}>
           <Image src={product.image} width={676} height={517} alt="kids" />
+          <p className={styles.classscreen__right__desc}>
+            {product.description}
+          </p>
         </div>
         <div className={styles.classscreen__right}>
           <div className={styles.classscreen__right__sec1}>
@@ -75,34 +110,38 @@ export default function ProductScreen(props) {
             <p className={styles.classscreen__right__sec1__cat}>
               {product.category}
             </p>
-            {userInfo && userInfo.isAdmin && (
-              <div className={styles.studentscont}>
-                <span className={styles.studentscont__campo1__title}>
-                  Student
-                </span>{' '}
-                <span className={styles.studentscont__campo1__title}>Cel</span>{' '}
-                <span className={styles.studentscont__campo1__title}>
-                  About
-                </span>{' '}
-              </div>
-            )}
-
-            {userInfo &&
-              userInfo.isAdmin &&
-              students &&
-              students.map((x) => (
-                <div className={styles.studentscont} key={x._id}>
-                  <a href={`/order/${x.orderid}`}>
-                    <span className={styles.studentscont__campo1}>
-                      {x.user}
-                    </span>{' '}
-                  </a>
-                  <span className={styles.studentscont__campo2}>
-                    {x.celphone}
-                  </span>{' '}
-                  <span className={styles.studentscont__campo3}>{x.desc}</span>{' '}
+            {userInfo && userInfo.isAdmin && students.length > 0 && (
+              <>
+                <div className={styles.searchbox}>
+                  <Search className={styles.searchbox__icon} fontSize="large" />
+                  <TextField
+                    onChange={handleSearch}
+                    placeholder="Search By Student"
+                    className={styles.searchbox__input}
+                  />
                 </div>
-              ))}
+                <TblContainer>
+                  <TblHead />
+                  <TableBody>
+                    {userInfo &&
+                      userInfo.isAdmin &&
+                      students &&
+                      recordsAfterPagingAndSorting().map((x) => (
+                        <TableRow key={x._id}>
+                          <TableCell>
+                            <NextLink href={`/order/${x.orderid}`}>
+                              {x.user}
+                            </NextLink>
+                          </TableCell>
+                          <TableCell>{x.celphone}</TableCell>
+                          <TableCell>{x.desc}</TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </TblContainer>
+                <TblPagination />
+              </>
+            )}
 
             <p className={styles.classscreen__right__sec1__starts}>
               <span className={styles.classscreen__right__sec1__starts__title}>
@@ -161,9 +200,6 @@ export default function ProductScreen(props) {
           </div>
         </div>
         <div className={styles.classscreen__right__sec2}>
-          <p className={styles.classscreen__right__sec2__title}>
-            {product.description}
-          </p>
           <p className={styles.classscreen__right__sec2__teach}>
             {product.teacher}
           </p>

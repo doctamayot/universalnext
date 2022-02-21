@@ -8,7 +8,7 @@ const handler = nc();
 
 handler.get(async (req, res) => {
   db.connect();
-  console.log(req);
+
   const product = await Product.findById(req.query.id);
   db.disconnect();
   if (product) {
@@ -20,7 +20,7 @@ handler.get(async (req, res) => {
 
 handler.put(async (req, res) => {
   await db.connect();
-  console.log(req.body);
+
   const product = await Product.findById(req.query.id);
   if (product) {
     const student = {
