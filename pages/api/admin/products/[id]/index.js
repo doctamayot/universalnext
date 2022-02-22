@@ -2,6 +2,13 @@ import nc from 'next-connect';
 import { isAdmin, isAuth } from '../../../../../utils/auth';
 import Product from '../../../../../models/Product';
 import db from '../../../../../utils/db';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const handler = nc();
 handler.use(isAuth, isAdmin);
@@ -16,7 +23,9 @@ export default handler;
 
 handler.put(async (req, res) => {
   await db.connect();
+
   const product = await Product.findById(req.query.id);
+
   if (product) {
     product.name = req.body.name;
     product.category = req.body.category;
@@ -30,6 +39,7 @@ handler.put(async (req, res) => {
     product.subtitle = req.body.subtitle;
     product.countInStock = req.body.countInStock;
     product.image = req.body.image;
+    product.imageId = req.body.imageId;
     product.location = req.body.location;
     product.slug = req.body.slug;
 
@@ -45,7 +55,9 @@ handler.put(async (req, res) => {
 handler.delete(async (req, res) => {
   await db.connect();
   const product = await Product.findById(req.query.id);
+
   if (product) {
+    await cloudinary.uploader.destroy(product.imageId);
     await product.remove();
     await db.disconnect();
     res.send({ message: 'Product Deleted' });

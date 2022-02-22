@@ -31,6 +31,7 @@ handler.post(async (req, res) => {
     countInStock: 5,
     location: '',
     image: '/img/kids2.jpg',
+    imageId: Math.random(),
   });
 
   const product = await newProduct.save();

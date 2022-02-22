@@ -45,6 +45,7 @@ function reducer(state, action) {
 const ProductEdit = ({ params }) => {
   const [nombre, setValue] = useState('');
   const [imagecloud, setImage] = useState('');
+  const [imageId, setImageId] = useState('');
   const productId = params.id;
   const { state } = useContext(Store);
   const [{ loadingUpdate, loadingUpload }, dispatch] = useReducer(reducer, {
@@ -64,8 +65,7 @@ const ProductEdit = ({ params }) => {
         /^[aA-zZ\s, /, -]+$/,
         'Only alphabets are allowed for this field '
       ),
-    category: Yup.string()
-    .required('Category is required'),
+    category: Yup.string().required('Category is required'),
     //.matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
 
     age: Yup.string()
@@ -148,6 +148,7 @@ const ProductEdit = ({ params }) => {
 
       dispatch({ type: 'UPLOAD_SUCCESS' });
       setImage(data.secure_url);
+      setImageId(data.public_id);
 
       Toast.fire({
         icon: 'success',
@@ -195,6 +196,7 @@ const ProductEdit = ({ params }) => {
           location,
           image: imagecloud ? imagecloud : nombre.image,
           slug: productId,
+          imageId: imageId ? imageId : nombre.image,
         },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
@@ -329,8 +331,8 @@ const ProductEdit = ({ params }) => {
                       className={styles.profilefield__campo}
                     >
                       <option value="" label="Select a location" />
-                      <option value="miami" label="Miami" />
-                      <option value="fort laurdedale" label="Fort Laurdedale" />
+                      <option value="Miami" label="Miami" />
+                      <option value="Fort Laurdedale" label="Fort Laurdedale" />
                     </Field>
                     {/* <Field
                       type="text"
@@ -398,9 +400,9 @@ const ProductEdit = ({ params }) => {
                       name="category"
                     >
                       <option value="" label="Select a category" />
-                      <option value="kids" label="Kids" />
-                      <option value="teens" label="Teens" />
-                      <option value="adults" label="Adults" />
+                      <option value="Kids" label="Kids" />
+                      <option value="Teens" label="Teens" />
+                      <option value="Adults" label="Adults" />
                     </Field>
                     {errors.category && touched.category ? (
                       <p className={styles.formerror}>{errors.category}</p>
@@ -417,7 +419,6 @@ const ProductEdit = ({ params }) => {
                     <Field
                       as="textarea"
                       className={styles.logincontact__campo__desc}
-                      placeholder="Category"
                       id="description"
                       name="description"
                     />

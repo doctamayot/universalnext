@@ -18,34 +18,23 @@ import styles from '../../styles/sass/main.module.scss';
 import { NextSeo } from 'next-seo';
 import { withStyles } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+
 import DeleteIcon from '@material-ui/icons/Delete';
-import teal from '@material-ui/core/colors/teal';
+
 import yellow from '@material-ui/core/colors/yellow';
-import AddBoxIcon from '@material-ui/icons/AddBox';
+
 import { Search } from '@material-ui/icons';
 
 import useTable from '../../components/useTable';
 
 const headCells = [
-  { id: 'orderId', label: 'Order Id' },
-  { id: 'class', label: 'Class' },
-  { id: 'price', label: 'Price' },
-  { id: 'category', label: 'Category' },
-
-  { id: 'places', label: 'Places' },
+  { id: 'email', label: 'Email' },
+  { id: 'FirstName', label: 'FirstName' },
+  { id: 'LastName', label: 'LastName' },
+  { id: 'celphone', label: 'Celphone' },
+  { id: 'isAdmin', label: 'Admin' },
   { id: 'actions', label: 'Actions' },
 ];
-
-const ColorButton = withStyles(() => ({
-  root: {
-    color: '#fff',
-    backgroundColor: teal[700],
-    '&:hover': {
-      backgroundColor: teal[900],
-    },
-  },
-}))(Button);
 
 const YellowButton = withStyles(() => ({
   root: {
@@ -62,7 +51,7 @@ function reducer(state, action) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' };
     case 'FETCH_SUCCESS':
-      return { ...state, loading: false, products: action.payload, error: '' };
+      return { ...state, loading: false, users: action.payload, error: '' };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
     case 'CREATE_REQUEST':
@@ -90,7 +79,7 @@ function reducer(state, action) {
   }
 }
 
-const Classes = () => {
+const Users = () => {
   const { state } = useContext(Store);
   const router = useRouter();
   const { userInfo } = state;
@@ -101,11 +90,11 @@ const Classes = () => {
   });
 
   const [
-    { loading, error, products, loadingCreate, successDelete, loadingDelete },
+    { loading, error, users, loadingCreate, successDelete, loadingDelete },
     dispatch,
   ] = useReducer(reducer, {
     loading: true,
-    products: [],
+    users: [],
     error: '',
   });
   useEffect(() => {
@@ -115,7 +104,7 @@ const Classes = () => {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/admin/classes`, {
+        const { data } = await axios.get(`/api/admin/users`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
 
@@ -150,37 +139,37 @@ const Classes = () => {
     },
   }))(TableRow);
 
-  const createHandler = async () => {
-    // if (!window.confirm('Are you sure?')) {
-    //   return;
-    // }
+  //   const createHandler = async () => {
+  //     // if (!window.confirm('Are you sure?')) {
+  //     //   return;
+  //     // }
 
-    try {
-      dispatch({ type: 'CREATE_REQUEST' });
-      const { data } = await axios.post(
-        `/api/admin/products`,
-        { data },
+  //     try {
+  //       dispatch({ type: 'CREATE_REQUEST' });
+  //       const { data } = await axios.post(
+  //         `/api/admin/products`,
+  //         { data },
 
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        }
-      );
+  //         {
+  //           headers: { authorization: `Bearer ${userInfo.token}` },
+  //         }
+  //       );
 
-      dispatch({ type: 'CREATE_SUCCESS' });
-      Toast.fire({
-        icon: 'success',
-        title: 'Class created successfully',
-      });
-      router.push(`/admin/classe/${data.product._id}`);
-    } catch (err) {
-      dispatch({ type: 'CREATE_FAIL' });
-      Toast.fire({
-        icon: 'error',
-        title: getError(err),
-      });
-    }
-  };
-  const deleteHandler = async (productId) => {
+  //       dispatch({ type: 'CREATE_SUCCESS' });
+  //       Toast.fire({
+  //         icon: 'success',
+  //         title: 'Class created successfully',
+  //       });
+  //       router.push(`/admin/classe/${data.product._id}`);
+  //     } catch (err) {
+  //       dispatch({ type: 'CREATE_FAIL' });
+  //       Toast.fire({
+  //         icon: 'error',
+  //         title: getError(err),
+  //       });
+  //     }
+  //   };
+  const deleteHandler = async (userId) => {
     // if (!window.confirm('Are you sure?')) {
     //   return;
     // }
@@ -196,7 +185,7 @@ const Classes = () => {
         confirmButtonText: 'Yes, delete it!',
       }).then(async (result) => {
         if (result.isConfirmed) {
-          await axios.delete(`/api/admin/products/${productId}`, {
+          await axios.delete(`/api/admin/users/${userId}`, {
             headers: { authorization: `Bearer ${userInfo.token}` },
           });
           dispatch({ type: 'DELETE_SUCCESS' });
@@ -226,39 +215,39 @@ const Classes = () => {
     },
   });
 
-  const smsHandler = async (productId) => {
-    // if (!window.confirm('Are you sure?')) {
-    //   return;
-    // }
+  //   const smsHandler = async (productId) => {
+  //     // if (!window.confirm('Are you sure?')) {
+  //     //   return;
+  //     // }
 
-    try {
-      dispatch({ type: 'SMS_REQUEST' });
-      const { data } = await axios.post(
-        `/api/admin/products/${productId}/twilio`,
-        { data },
+  //     try {
+  //       dispatch({ type: 'SMS_REQUEST' });
+  //       const { data } = await axios.post(
+  //         `/api/admin/products/${productId}/twilio`,
+  //         { data },
 
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        }
-      );
+  //         {
+  //           headers: { authorization: `Bearer ${userInfo.token}` },
+  //         }
+  //       );
 
-      dispatch({ type: 'SMS_SUCCESS' });
-      Toast.fire({
-        icon: 'success',
-        title: 'Message sent successfully',
-      });
-      //router.push(`/admin/classe/${data.product._id}`);
-    } catch (err) {
-      dispatch({ type: 'SMS_FAIL' });
-      Toast.fire({
-        icon: 'error',
-        title: getError(err),
-      });
-    }
-  };
+  //       dispatch({ type: 'SMS_SUCCESS' });
+  //       Toast.fire({
+  //         icon: 'success',
+  //         title: 'Message sent successfully',
+  //       });
+  //       //router.push(`/admin/classe/${data.product._id}`);
+  //     } catch (err) {
+  //       dispatch({ type: 'SMS_FAIL' });
+  //       Toast.fire({
+  //         icon: 'error',
+  //         title: getError(err),
+  //       });
+  //     }
+  //   };
 
   const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
-    useTable(products, headCells, filterFn);
+    useTable(users, headCells, filterFn);
 
   const handleSearch = (e) => {
     let target = e.target;
@@ -267,7 +256,7 @@ const Classes = () => {
         if (target.value == '') return orders;
         else
           return orders.filter((x) =>
-            x.name.toLowerCase().includes(target.value)
+            x.email.toLowerCase().includes(target.value)
           );
       },
     });
@@ -276,8 +265,8 @@ const Classes = () => {
   return (
     <>
       <NextSeo
-        title="Universal Acting - Classes"
-        description="Universal Acting Classes "
+        title="Universal Acting - Users"
+        description="Universal Acting Users "
       />
       {loadingDelete && (
         <div className={styles.spinner}>
@@ -331,8 +320,8 @@ const Classes = () => {
           ) : null}
         </div>
         <div className={styles.orderhistcontainer__right}>
-          <h4 className={styles.profilefield__title}>Classes Admin</h4>
-          <div className={styles.profilefield__create}>
+          <h4 className={styles.profilefield__title}>Users Admin</h4>
+          {/* <div className={styles.profilefield__create}>
             <Button
               //className={styles.profilefield__create__button}
               onClick={createHandler}
@@ -342,7 +331,7 @@ const Classes = () => {
             >
               Create
             </Button>
-          </div>
+          </div> */}
           {loading ? (
             <div className={styles.spinner}>
               <CircularProgress />
@@ -351,10 +340,8 @@ const Classes = () => {
             <div>{error}</div>
           ) : (
             <>
-              {products.length === 0 ? (
-                <div className={styles.nohaybookings}>
-                  You have not made classes
-                </div>
+              {users.length === 0 ? (
+                <div className={styles.nohaybookings}>Not Users</div>
               ) : (
                 <>
                   <div className={styles.searchbox}>
@@ -364,27 +351,25 @@ const Classes = () => {
                     />
                     <TextField
                       onChange={handleSearch}
-                      placeholder="Search By Student"
+                      placeholder="Search By Email"
                       className={styles.searchbox__input}
                     />
                   </div>
                   <TblContainer>
                     <TblHead />
                     <TableBody>
-                      {recordsAfterPagingAndSorting().map((order) => (
-                        <StyledTableRow key={order._id}>
+                      {recordsAfterPagingAndSorting().map((user) => (
+                        <StyledTableRow key={user._id}>
+                          <StyledTableCell>{user.email}</StyledTableCell>
+                          <StyledTableCell>{user.firstname}</StyledTableCell>
+                          <StyledTableCell>{user.lastname}</StyledTableCell>
+                          <StyledTableCell>{user.celphone}</StyledTableCell>
                           <StyledTableCell>
-                            {order._id.substring(20, 24)}
-                          </StyledTableCell>
-                          <StyledTableCell>{order.name}</StyledTableCell>
-                          <StyledTableCell>${order.price}</StyledTableCell>
-                          <StyledTableCell>{order.category}</StyledTableCell>
-                          <StyledTableCell>
-                            {order.countInStock}
+                            {user.isAdmin ? 'Yes' : 'No'}
                           </StyledTableCell>
                           {/* <StyledTableCell>{order.rating}</StyledTableCell> */}
                           <StyledTableCell>
-                            <NextLink href={`/classe/${order._id}`} passHref>
+                            <NextLink href={`/user/${user._id}`} passHref>
                               <YellowButton
                                 startIcon={<EditIcon />}
                                 variant="contained"
@@ -392,32 +377,13 @@ const Classes = () => {
                                 View
                               </YellowButton>
                             </NextLink>{' '}
-                            <NextLink
-                              href={`/admin/classe/${order._id}`}
-                              passHref
-                            >
-                              <ColorButton
-                                startIcon={<EditIcon />}
-                                variant="contained"
-                              >
-                                Edit
-                              </ColorButton>
-                            </NextLink>{' '}
                             <Button
                               color="secondary"
                               startIcon={<DeleteIcon />}
                               variant="contained"
-                              onClick={() => deleteHandler(order._id)}
+                              onClick={() => deleteHandler(user._id)}
                             >
                               Delete
-                            </Button>
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              startIcon={<CloudUploadIcon />}
-                              onClick={() => smsHandler(order._id)}
-                            >
-                              sms
                             </Button>
                           </StyledTableCell>
                         </StyledTableRow>
@@ -435,4 +401,4 @@ const Classes = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Classes), { ssr: false });
+export default dynamic(() => Promise.resolve(Users), { ssr: false });

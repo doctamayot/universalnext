@@ -148,6 +148,15 @@ function AdminDashboard() {
               </a>
             </NextLink>
           </div>
+          {userInfo && userInfo.isAdmin ? (
+            <div className={styles.orderhistcontainer__left__menu}>
+              <NextLink href="/admin/users" passHref>
+                <a>
+                  <div className={styles.profilelink}>Users</div>
+                </a>
+              </NextLink>
+            </div>
+          ) : null}
         </div>
         <div className={styles.orderhistcontainer__right}>
           <h4 className={styles.profilefield__title}>Bookings Admin</h4>
