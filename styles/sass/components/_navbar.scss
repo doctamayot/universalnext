@@ -2,7 +2,12 @@
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.4);
   display: flex;
   width: 100%;
+  margin-top: 10px;
   &__link {
+    font-size: 10px;
+    @include respond(tab-port) {
+      font-size: 20px;
+    }
     &__login {
       padding-left: 10px;
       &__cont {

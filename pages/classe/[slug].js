@@ -9,15 +9,30 @@ import Product from '../../models/Product';
 import db from '../../utils/db';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import { TextField, TableBody, TableRow, TableCell } from '@material-ui/core';
+import {
+  TextField,
+  TableBody,
+  TableRow,
+  TableCell,
+  Button,
+  withStyles,
+} from '@material-ui/core';
 import useTable from '../../components/useTable';
-import { Search } from '@material-ui/icons';
+import { Search, ShoppingCart } from '@material-ui/icons';
 
 const headCells = [
   { id: 'student', label: 'Student' },
   { id: 'celphone', label: 'celphone' },
   { id: 'desc', label: 'description' },
 ];
+
+const CartButton = withStyles(() => ({
+  root: {
+    color: '#fff',
+    fontFamily: 'Bebas Neue',
+    fontSize: '2rem',
+  },
+}))(Button);
 
 export default function ProductScreen(props) {
   const [filterFn, setFilterFn] = useState({
@@ -189,12 +204,14 @@ export default function ProductScreen(props) {
                   SOLD OUT
                 </div>
               ) : (
-                <button
-                  className={styles.classscreen__right__sec1__cart__buttoncart}
+                <CartButton
                   onClick={addToCartHandler}
+                  startIcon={<ShoppingCart />}
+                  variant="contained"
+                  color="primary"
                 >
                   ADD TO CART
-                </button>
+                </CartButton>
               )}
             </div>
           </div>

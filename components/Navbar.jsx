@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/sass/main.module.scss';
-import { MdOutlineMenu } from 'react-icons/md';
+//import { MdOutlineMenu } from 'react-icons/md';
 import { TiShoppingCart } from 'react-icons/ti';
 import { BiLogInCircle } from 'react-icons/bi';
 import { useRouter } from 'next/router';
@@ -10,7 +10,7 @@ import React, { useContext, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Cookies from 'js-cookie';
 
-const Navbar = ({ toggleSidebar }) => {
+const Navbar = () => {
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
   const { cart, userInfo } = state;
@@ -51,50 +51,24 @@ const Navbar = ({ toggleSidebar }) => {
         </Link>
       </div>
       <ul className={styles.navbar__list}>
-        <li
-          className={
-            router.pathname == '/'
-              ? styles.navbar__active
-              : styles.navbar__list__item
-          }
-        >
+        <li className={styles.navbar__list__item}>
           <Link href="/">
             <a className={styles.navbar__link}>Home</a>
           </Link>
         </li>
-        {/* <li
-          className={
-            router.pathname == '/about'
-              ? styles.navbar__active
-              : styles.navbar__list__item
-          }
-        >
-          <Link href="/about">
-            <a className={styles.navbar__link}>About</a>
-          </Link>
-        </li> */}
-        <li
-          className={
-            router.pathname == '/classes'
-              ? styles.navbar__active
-              : styles.navbar__list__item
-          }
-        >
+
+        <li className={styles.navbar__list__item}>
           <Link className={styles.navbar__link} href="/classes">
             <a className={styles.navbar__link}>Classes</a>
           </Link>
         </li>
-        {/* <li
-          className={
-            router.pathname == '/gallery'
-              ? styles.navbar__active
-              : styles.navbar__list__item
-          }
-        >
-          <Link className={styles.navbar__link} href="/gallery">
-            Gallery
+
+        <li className={styles.navbar__list__item}>
+          <Link className={styles.navbar__link} href="/teachers">
+            <a className={styles.navbar__link}>Teachers</a>
           </Link>
-        </li> */}
+        </li>
+
         <div className={styles.navbar__list__item}>
           <Link className={styles.navbar__link} href="/cart">
             {cart.cartItems.length > 0 ? (
@@ -163,9 +137,9 @@ const Navbar = ({ toggleSidebar }) => {
           </>
         ) : null} */}
 
-        <div className={styles.navbar__button} onClick={toggleSidebar}>
+        {/* <div className={styles.navbar__button} onClick={toggleSidebar}>
           <MdOutlineMenu size="3rem" color="black" />
-        </div>
+        </div> */}
       </ul>
     </nav>
   );

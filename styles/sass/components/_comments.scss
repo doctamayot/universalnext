@@ -2,9 +2,9 @@
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 5s ease infinite;
-  margin: 10px 10px;
+  margin: 0px 10px;
   @include respond(big-desktop) {
-    margin: 0 200px;
+    margin: 30px 200px;
   }
   @keyframes gradient {
     0% {

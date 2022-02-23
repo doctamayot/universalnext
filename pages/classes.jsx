@@ -6,7 +6,7 @@ import Product from '../models/Product';
 
 const classes = (props) => {
   const { products } = props;
-  console.log(products);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.container__title}>Explore our Acting Classes</h2>
@@ -39,23 +39,22 @@ const classes = (props) => {
                   <span>
                     Age:{' '}
                     <span className={styles.classlist__item__varios__li__res}>
-                      {classe.age[0]} - {classe.age[classe.age.length - 1]}{' '}
-                      years
+                      {classe.age} years
                     </span>{' '}
                   </span>
                 </li>
                 <li className={styles.classlist__item__varios__li}>
                   <span>
-                    Starts:
+                    Duration:
                     <span className={styles.classlist__item__varios__li__res}>
                       {' '}
-                      {classe.days[0]}
+                      {classe.duration}
                     </span>{' '}
                   </span>
                 </li>
 
                 <li className={styles.classlist__item__varios__li}>
-                  <span>Sessions: {classe.days.length} </span>
+                  <span>Sessions: {classe.days} </span>
                 </li>
                 <li className={styles.classlist__item__varios__li}>
                   <span>

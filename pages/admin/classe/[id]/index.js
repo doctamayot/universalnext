@@ -266,12 +266,21 @@ const ProductEdit = ({ params }) => {
               </a>
             </NextLink>
           </div>
+          {userInfo && userInfo.isAdmin ? (
+            <div className={styles.orderhistcontainer__left__menu}>
+              <NextLink href="/admin/users" passHref>
+                <a>
+                  <div className={styles.profilelink}>Users</div>
+                </a>
+              </NextLink>
+            </div>
+          ) : null}
         </div>
         <div className={styles.orderhistcontainer__right}>
           <h4 className={styles.profilefield__title}>Edit Class</h4>
           <div className={styles.botonimagen}>
             <Image
-              src={!imagecloud ? '/img/kids2.jpg' : imagecloud}
+              src={!nombre.image ? '/img/kids2.jpg' : nombre.image}
               alt="imagen universal"
               width={610}
               height={489}
@@ -295,7 +304,6 @@ const ProductEdit = ({ params }) => {
             validationSchema={loginSchema}
             initialValues={{
               name: nombre ? nombre.name : '',
-
               location: nombre ? nombre.location : '',
               category: nombre ? nombre.category : '',
               description: nombre ? nombre.description : '',
@@ -393,7 +401,6 @@ const ProductEdit = ({ params }) => {
                     </label>
                     <Field
                       as="select"
-                      type="text"
                       className={styles.profilefield__campo}
                       placeholder="Category"
                       id="category"

@@ -11,24 +11,19 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
       )}
       <nav className={isOpen ? styles.sidebar__open : styles.sidebar__closed}>
         <ul className={styles.sidebar__list}>
-          <li className={styles.sidebar__list__item} onClick={closeSidebar}>
+          <li className={styles.sidebar__list__item}>
             <Link className={styles.sidebar__link} href="/">
-              Home
+              <a>Home</a>
             </Link>
           </li>
-          <li className={styles.sidebar__list__item} onClick={closeSidebar}>
-            <Link className={styles.sidebar__link} href="/about">
-              About
-            </Link>
-          </li>
-          <li className={styles.sidebar__list__item} onClick={closeSidebar}>
-            <Link className={styles.sidebar__link} href="/services">
+          <li className={styles.sidebar__list__item}>
+            <Link className={styles.sidebar__link} href="/classes">
               Classes
             </Link>
           </li>
-          <li className={styles.sidebar__list__item} onClick={closeSidebar}>
-            <Link className="sidebar__link" href="/gallery">
-              Gallery
+          <li className={styles.sidebar__list__item}>
+            <Link className={styles.sidebar__link} href="/teachers">
+              Teachers
             </Link>
           </li>
         </ul>

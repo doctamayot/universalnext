@@ -1,0 +1,88 @@
+.teachcont {
+  @include respond(desktop) {
+  }
+  padding: 20px;
+  font-family: 'Dosis', cursive;
+  &__title {
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Bebas Neue', cursive;
+    @include respond(desktop) {
+      font-size: 6rem;
+    }
+  }
+
+  &__grid {
+    @include respond(tab-port) {
+      display: grid;
+      gap: 50px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(auto);
+    }
+    @include respond(big-desktop) {
+      padding: 0 200px;
+    }
+
+    &__image1 {
+      text-align: center;
+      margin-top: 20px;
+      &__title {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+    }
+    &__text1 {
+      font-size: 1.7rem;
+      margin-top: 20px;
+      grid-column: 2/4;
+
+      padding: 10px;
+      @include respond(big-desktop) {
+        font-size: 2.3rem;
+      }
+    }
+
+    &__image2 {
+      text-align: center;
+      margin-top: 20px;
+      &__title {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+    }
+
+    &__text2 {
+      font-size: 1.7rem;
+
+      grid-column: 1/3;
+      grid-row: 2;
+      margin-top: 60px;
+
+      padding: 10px;
+      @include respond(big-desktop) {
+        font-size: 2.3rem;
+      }
+    }
+
+    &__image3 {
+      text-align: center;
+      margin-top: 20px;
+      &__title {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+    }
+
+    &__text3 {
+      font-size: 1.7rem;
+      grid-column: 2/4;
+      grid-row: 3;
+      margin-top: 60px;
+
+      padding: 10px;
+      @include respond(big-desktop) {
+        font-size: 2.3rem;
+      }
+    }
+  }
+}

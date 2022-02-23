@@ -70,33 +70,41 @@ export default function Home(props) {
                     <span>
                       Age:{' '}
                       <span className={styles.classlist__item__varios__li__res}>
-                        {classe.age[0]} - {classe.age[classe.age.length - 1]}{' '}
-                        years
+                        {classe.age} years
                       </span>{' '}
                     </span>
                   </li>
                   <li className={styles.classlist__item__varios__li}>
                     <span>
-                      Starts:
+                      Duration:
                       <span className={styles.classlist__item__varios__li__res}>
                         {' '}
-                        {classe.days[0]}
+                        {classe.duration}
                       </span>{' '}
                     </span>
                   </li>
 
                   <li className={styles.classlist__item__varios__li}>
-                    <span>Sessions: {classe.days.length} </span>
+                    <span>Sessions: {classe.days} </span>
+                  </li>
+                  <li className={styles.classlist__item__varios__li}>
+                    <span>
+                      Places:{' '}
+                      <span className={styles.classlist__item__varios__li__res}>
+                        {classe.countInStock} Student(s)
+                      </span>{' '}
+                    </span>
                   </li>
 
                   {/* {classe.days.map((day) => (
-              <div key={day}>{day[0]}</div>
-            ))} */}
+        <div key={day}>{day[0]}</div>
+      ))} */}
                 </ul>
 
                 <p className={styles.classlist__item__precio}>
                   ${classe.price}
                 </p>
+
                 <NextLink href={`/classe/${classe.slug}`} passHref>
                   <div className={styles.classlist__item__divboton}>
                     <button className={styles.classlist__item__boton}>
