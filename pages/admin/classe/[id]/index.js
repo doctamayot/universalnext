@@ -2,7 +2,6 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-
 import React, { useEffect, useContext, useReducer, useState } from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
 import { getError } from '../../../../utils/error';
@@ -12,7 +11,7 @@ import { Formik, Form, Field } from 'formik';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import * as Yup from 'yup';
-import Adminside from '../../../../components/adminside';
+import Adminside from '../../../../components/AdminSide';
 
 function reducer(state, action) {
   switch (action.type) {
