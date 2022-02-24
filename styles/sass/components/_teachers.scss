@@ -16,7 +16,7 @@
     @include respond(tab-port) {
       display: grid;
       gap: 50px;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(10, 1fr);
       grid-auto-rows: minmax(auto);
     }
     @include respond(big-desktop) {
@@ -30,6 +30,10 @@
         font-size: 2.5rem;
         margin-bottom: 20px;
       }
+      @include respond(tab-port) {
+        grid-column: 7/11;
+        grid-row: 1;
+      }
     }
     &__text1 {
       font-size: 1.7rem;
@@ -40,6 +44,10 @@
       @include respond(big-desktop) {
         font-size: 2.3rem;
       }
+      @include respond(tab-port) {
+        grid-column: 1/8;
+        grid-row: 1;
+      }
     }
 
     &__image2 {
@@ -48,6 +56,10 @@
       &__title {
         font-size: 2.5rem;
         margin-bottom: 20px;
+      }
+      @include respond(tab-port) {
+        grid-column: 1/5;
+        grid-row: 2;
       }
     }
 
@@ -62,6 +74,10 @@
       @include respond(big-desktop) {
         font-size: 2.3rem;
       }
+      @include respond(tab-port) {
+        grid-column: 4/11;
+        grid-row: 2;
+      }
     }
 
     &__image3 {
@@ -70,6 +86,10 @@
       &__title {
         font-size: 2.5rem;
         margin-bottom: 20px;
+      }
+      @include respond(tab-port) {
+        grid-column: 7/11;
+        grid-row: 3;
       }
     }
 
@@ -82,6 +102,10 @@
       padding: 10px;
       @include respond(big-desktop) {
         font-size: 2.3rem;
+      }
+      @include respond(tab-port) {
+        grid-column: 1/8;
+        grid-row: 3;
       }
     }
   }

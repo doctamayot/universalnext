@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import NextLink from 'next/link';
+
 import React, { useEffect, useContext, useReducer, useState } from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
 import { getError } from '../../../../utils/error';
@@ -12,6 +12,7 @@ import { Formik, Form, Field } from 'formik';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import * as Yup from 'yup';
+import Adminside from '../../../../components/adminside';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -237,45 +238,7 @@ const ProductEdit = ({ params }) => {
       />
       <h4 className={styles.orderhistcontainer__title}>Control Panel </h4>
       <div className={styles.orderhistcontainer}>
-        <div className={styles.orderhistcontainer__left}>
-          <div className={styles.orderhistcontainer__left__menu}>
-            <NextLink href="/profile" passHref>
-              <a>
-                <div className={styles.profilelink}>Profile</div>
-              </a>
-            </NextLink>
-          </div>
-          <div className={styles.orderhistcontainer__left__menu}>
-            <NextLink href="/admin/classes" passHref>
-              <a>
-                <div className={styles.profilelink}>Admin Classes</div>
-              </a>
-            </NextLink>
-          </div>
-          <div className={styles.orderhistcontainer__left__menu}>
-            <NextLink
-              href={
-                userInfo && userInfo.isAdmin
-                  ? '/admin/orders'
-                  : '/order_history'
-              }
-              passHref
-            >
-              <a>
-                <div className={styles.profilelink}>Bookings</div>
-              </a>
-            </NextLink>
-          </div>
-          {userInfo && userInfo.isAdmin ? (
-            <div className={styles.orderhistcontainer__left__menu}>
-              <NextLink href="/admin/users" passHref>
-                <a>
-                  <div className={styles.profilelink}>Users</div>
-                </a>
-              </NextLink>
-            </div>
-          ) : null}
-        </div>
+        <Adminside userInfo={userInfo} />
         <div className={styles.orderhistcontainer__right}>
           <h4 className={styles.profilefield__title}>Edit Class</h4>
           <div className={styles.botonimagen}>

@@ -23,6 +23,7 @@ import useTable from '../../components/useTable';
 import { Search } from '@material-ui/icons';
 import teal from '@material-ui/core/colors/teal';
 import EditIcon from '@material-ui/icons/Edit';
+import Adminside from '../../components/AdminSide';
 
 const headCells = [
   { id: 'orderId', label: 'Order Id' },
@@ -119,45 +120,7 @@ function AdminDashboard() {
       <h4 className={styles.orderhistcontainer__title}>Control Panel </h4>
 
       <div className={styles.orderhistcontainer}>
-        <div className={styles.orderhistcontainer__left}>
-          <div className={styles.orderhistcontainer__left__menu}>
-            <NextLink href="/profile" passHref>
-              <a>
-                <div className={styles.profilelink}>Profile</div>
-              </a>
-            </NextLink>
-          </div>
-          <div className={styles.orderhistcontainer__left__menu}>
-            <NextLink href="/admin/classes" passHref>
-              <a>
-                <div className={styles.profilelink}>Admin Classes</div>
-              </a>
-            </NextLink>
-          </div>
-          <div className={styles.orderhistcontainer__left__menu}>
-            <NextLink
-              href={
-                userInfo && userInfo.isAdmin
-                  ? '/admin/orders'
-                  : '/order_history'
-              }
-              passHref
-            >
-              <a>
-                <div className={styles.profilelink}>Bookings</div>
-              </a>
-            </NextLink>
-          </div>
-          {userInfo && userInfo.isAdmin ? (
-            <div className={styles.orderhistcontainer__left__menu}>
-              <NextLink href="/admin/users" passHref>
-                <a>
-                  <div className={styles.profilelink}>Users</div>
-                </a>
-              </NextLink>
-            </div>
-          ) : null}
-        </div>
+        <Adminside userInfo={userInfo} />
         <div className={styles.orderhistcontainer__right}>
           <h4 className={styles.profilefield__title}>Bookings Admin</h4>
           {loading ? (

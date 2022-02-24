@@ -3,12 +3,14 @@ import Image from 'next/image';
 import styles from '../styles/sass/main.module.scss';
 //import { MdOutlineMenu } from 'react-icons/md';
 import { TiShoppingCart } from 'react-icons/ti';
-import { BiLogInCircle } from 'react-icons/bi';
+import { BiLogInCircle, BiLogOut } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 import { Store } from '../utils/Store';
 import React, { useContext, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Cookies from 'js-cookie';
+import { Button } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
 
 const Navbar = () => {
   const { state, dispatch } = useContext(Store);
@@ -98,15 +100,31 @@ const Navbar = () => {
 
             <li
               className={styles.navbar__list__item__user__menu}
-              onClick={panelClickHandler}
+              //onClick={panelClickHandler}
             >
-              Panel
+              <Button
+                onClick={panelClickHandler}
+                variant="contained"
+                color="primary"
+                startIcon={<Menu />}
+                size="small"
+              >
+                Panel
+              </Button>
             </li>
             <li
               className={styles.navbar__list__item__user__menu2}
-              onClick={logoutClickHandler}
+              //onClick={logoutClickHandler}
             >
-              Logout
+              <Button
+                onClick={logoutClickHandler}
+                variant="contained"
+                color="secondary"
+                startIcon={<BiLogOut />}
+                size="small"
+              >
+                Logout
+              </Button>
             </li>
           </>
         ) : (

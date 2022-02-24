@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import NextLink from 'next/link';
+
 import React, { useEffect, useContext, useReducer, useState } from 'react';
 import Swal from 'sweetalert2';
 import {
@@ -17,11 +17,8 @@ import { Store } from '../../utils/Store';
 import styles from '../../styles/sass/main.module.scss';
 import { NextSeo } from 'next-seo';
 import { withStyles } from '@material-ui/core/styles';
-import EditIcon from '@material-ui/icons/Edit';
 
 import DeleteIcon from '@material-ui/icons/Delete';
-
-import yellow from '@material-ui/core/colors/yellow';
 
 import { Search } from '@material-ui/icons';
 
@@ -29,38 +26,21 @@ import useTable from '../../components/useTable';
 import Adminside from '../../components/AdminSide';
 
 const headCells = [
+  { id: 'firstname', label: 'First Name' },
+  { id: 'lastname', label: 'Last Name' },
   { id: 'email', label: 'Email' },
-  { id: 'FirstName', label: 'FirstName' },
-  { id: 'LastName', label: 'LastName' },
-  { id: 'celphone', label: 'Celphone' },
-  { id: 'isAdmin', label: 'Admin' },
+  { id: 'message', label: 'Message' },
   { id: 'actions', label: 'Actions' },
 ];
-
-const YellowButton = withStyles(() => ({
-  root: {
-    color: '#fff',
-    backgroundColor: yellow[700],
-    '&:hover': {
-      backgroundColor: yellow[900],
-    },
-  },
-}))(Button);
 
 function reducer(state, action) {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' };
     case 'FETCH_SUCCESS':
-      return { ...state, loading: false, users: action.payload, error: '' };
+      return { ...state, loading: false, messages: action.payload, error: '' };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
-    case 'CREATE_REQUEST':
-      return { ...state, loadingCreate: true };
-    case 'CREATE_SUCCESS':
-      return { ...state, loadingCreate: false };
-    case 'CREATE_FAIL':
-      return { ...state, loadingCreate: false };
     case 'DELETE_REQUEST':
       return { ...state, loadingDelete: true };
     case 'DELETE_SUCCESS':
@@ -69,18 +49,13 @@ function reducer(state, action) {
       return { ...state, loadingDelete: false };
     case 'DELETE_RESET':
       return { ...state, loadingDelete: false, successDelete: false };
-    case 'SMS_REQUEST':
-      return { ...state, loadingSms: true };
-    case 'SMS_SUCCESS':
-      return { ...state, loadingSms: false };
-    case 'SMS_FAIL':
-      return { ...state, loadingSms: false };
+
     default:
       state;
   }
 }
 
-const Users = () => {
+const Messages = () => {
   const { state } = useContext(Store);
   const router = useRouter();
   const { userInfo } = state;
@@ -90,14 +65,12 @@ const Users = () => {
     },
   });
 
-  const [
-    { loading, error, users, loadingCreate, successDelete, loadingDelete },
-    dispatch,
-  ] = useReducer(reducer, {
-    loading: true,
-    users: [],
-    error: '',
-  });
+  const [{ loading, error, messages, successDelete, loadingDelete }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      messages: [],
+      error: '',
+    });
   useEffect(() => {
     if (!userInfo) {
       router.push('/login');
@@ -105,7 +78,7 @@ const Users = () => {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/admin/users`, {
+        const { data } = await axios.get(`/api/admin/messages`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
 
@@ -140,37 +113,7 @@ const Users = () => {
     },
   }))(TableRow);
 
-  //   const createHandler = async () => {
-  //     // if (!window.confirm('Are you sure?')) {
-  //     //   return;
-  //     // }
-
-  //     try {
-  //       dispatch({ type: 'CREATE_REQUEST' });
-  //       const { data } = await axios.post(
-  //         `/api/admin/products`,
-  //         { data },
-
-  //         {
-  //           headers: { authorization: `Bearer ${userInfo.token}` },
-  //         }
-  //       );
-
-  //       dispatch({ type: 'CREATE_SUCCESS' });
-  //       Toast.fire({
-  //         icon: 'success',
-  //         title: 'Class created successfully',
-  //       });
-  //       router.push(`/admin/classe/${data.product._id}`);
-  //     } catch (err) {
-  //       dispatch({ type: 'CREATE_FAIL' });
-  //       Toast.fire({
-  //         icon: 'error',
-  //         title: getError(err),
-  //       });
-  //     }
-  //   };
-  const deleteHandler = async (userId) => {
+  const deleteHandler = async (productId) => {
     // if (!window.confirm('Are you sure?')) {
     //   return;
     // }
@@ -186,7 +129,7 @@ const Users = () => {
         confirmButtonText: 'Yes, delete it!',
       }).then(async (result) => {
         if (result.isConfirmed) {
-          await axios.delete(`/api/admin/users/${userId}`, {
+          await axios.delete(`/api/admin/messages/${productId}`, {
             headers: { authorization: `Bearer ${userInfo.token}` },
           });
           dispatch({ type: 'DELETE_SUCCESS' });
@@ -216,39 +159,8 @@ const Users = () => {
     },
   });
 
-  //   const smsHandler = async (productId) => {
-  //     // if (!window.confirm('Are you sure?')) {
-  //     //   return;
-  //     // }
-
-  //     try {
-  //       dispatch({ type: 'SMS_REQUEST' });
-  //       const { data } = await axios.post(
-  //         `/api/admin/products/${productId}/twilio`,
-  //         { data },
-
-  //         {
-  //           headers: { authorization: `Bearer ${userInfo.token}` },
-  //         }
-  //       );
-
-  //       dispatch({ type: 'SMS_SUCCESS' });
-  //       Toast.fire({
-  //         icon: 'success',
-  //         title: 'Message sent successfully',
-  //       });
-  //       //router.push(`/admin/classe/${data.product._id}`);
-  //     } catch (err) {
-  //       dispatch({ type: 'SMS_FAIL' });
-  //       Toast.fire({
-  //         icon: 'error',
-  //         title: getError(err),
-  //       });
-  //     }
-  //   };
-
   const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
-    useTable(users, headCells, filterFn);
+    useTable(messages, headCells, filterFn);
 
   const handleSearch = (e) => {
     let target = e.target;
@@ -266,35 +178,21 @@ const Users = () => {
   return (
     <>
       <NextSeo
-        title="Universal Acting - Users"
-        description="Universal Acting Users "
+        title="Universal Acting - Classes"
+        description="Universal Acting Classes "
       />
       {loadingDelete && (
         <div className={styles.spinner}>
           <CircularProgress />
         </div>
       )}
-      {loadingCreate && (
-        <div className={styles.spinner}>
-          <CircularProgress />
-        </div>
-      )}
+
       <h4 className={styles.orderhistcontainer__title}>Control Panel </h4>
       <div className={styles.orderhistcontainer}>
         <Adminside userInfo={userInfo} />
         <div className={styles.orderhistcontainer__right}>
-          <h4 className={styles.profilefield__title}>Users Admin</h4>
-          {/* <div className={styles.profilefield__create}>
-            <Button
-              //className={styles.profilefield__create__button}
-              onClick={createHandler}
-              variant="contained"
-              color="primary"
-              startIcon={<AddBoxIcon />}
-            >
-              Create
-            </Button>
-          </div> */}
+          <h4 className={styles.profilefield__title}>Community Admin</h4>
+
           {loading ? (
             <div className={styles.spinner}>
               <CircularProgress />
@@ -303,8 +201,10 @@ const Users = () => {
             <div>{error}</div>
           ) : (
             <>
-              {users.length === 0 ? (
-                <div className={styles.nohaybookings}>Not Users</div>
+              {!messages.length === 0 ? (
+                <div className={styles.nohaybookings}>
+                  You have not made classes
+                </div>
               ) : (
                 <>
                   <div className={styles.searchbox}>
@@ -314,37 +214,27 @@ const Users = () => {
                     />
                     <TextField
                       onChange={handleSearch}
-                      placeholder="Search By Email"
+                      placeholder="Search By Student"
                       className={styles.searchbox__input}
                     />
                   </div>
                   <TblContainer>
                     <TblHead />
                     <TableBody>
-                      {recordsAfterPagingAndSorting().map((user) => (
-                        <StyledTableRow key={user._id}>
-                          <StyledTableCell>{user.email}</StyledTableCell>
-                          <StyledTableCell>{user.firstname}</StyledTableCell>
-                          <StyledTableCell>{user.lastname}</StyledTableCell>
-                          <StyledTableCell>{user.celphone}</StyledTableCell>
-                          <StyledTableCell>
-                            {user.isAdmin ? 'Yes' : 'No'}
-                          </StyledTableCell>
+                      {recordsAfterPagingAndSorting().map((order) => (
+                        <StyledTableRow key={order._id}>
+                          <StyledTableCell>{order.firstname}</StyledTableCell>
+                          <StyledTableCell>{order.lastname}</StyledTableCell>
+                          <StyledTableCell>{order.email}</StyledTableCell>
+                          <StyledTableCell>{order.desc}</StyledTableCell>
+
                           {/* <StyledTableCell>{order.rating}</StyledTableCell> */}
                           <StyledTableCell>
-                            <NextLink href={`/user/${user._id}`} passHref>
-                              <YellowButton
-                                startIcon={<EditIcon />}
-                                variant="contained"
-                              >
-                                View
-                              </YellowButton>
-                            </NextLink>{' '}
                             <Button
                               color="secondary"
                               startIcon={<DeleteIcon />}
                               variant="contained"
-                              onClick={() => deleteHandler(user._id)}
+                              onClick={() => deleteHandler(order._id)}
                             >
                               Delete
                             </Button>
@@ -364,4 +254,4 @@ const Users = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Users), { ssr: false });
+export default dynamic(() => Promise.resolve(Messages), { ssr: false });

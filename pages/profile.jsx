@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import NextLink from 'next/link';
+
 import React, { useEffect, useContext } from 'react';
 import styles from '../styles/sass/main.module.scss';
 import { Formik, Form, Field } from 'formik';
@@ -11,6 +11,7 @@ import { Store } from '../utils/Store';
 
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
+import Adminside from '../components/AdminSide';
 
 function Profile() {
   const { state, dispatch } = useContext(Store);
@@ -114,49 +115,7 @@ function Profile() {
       />
       <h4 className={styles.orderhistcontainer__title}>Control Panel </h4>
       <div className={styles.orderhistcontainer}>
-        <div className={styles.orderhistcontainer__left}>
-          <div className={styles.orderhistcontainer__left__menu}>
-            <NextLink href="/profile" passHref>
-              <a>
-                <div className={styles.profilelink}>Profile</div>
-              </a>
-            </NextLink>
-          </div>
-
-          {userInfo && userInfo.isAdmin ? (
-            <div className={styles.orderhistcontainer__left__menu}>
-              <NextLink href="/admin/classes" passHref>
-                <a>
-                  <div className={styles.profilelink}>Admin Classes</div>
-                </a>
-              </NextLink>
-            </div>
-          ) : null}
-
-          <div className={styles.orderhistcontainer__left__menu}>
-            <NextLink
-              href={
-                userInfo && userInfo.isAdmin
-                  ? '/admin/orders'
-                  : '/order_history'
-              }
-              passHref
-            >
-              <a>
-                <div className={styles.profilelink}>Bookings</div>
-              </a>
-            </NextLink>
-          </div>
-          {userInfo && userInfo.isAdmin ? (
-            <div className={styles.orderhistcontainer__left__menu}>
-              <NextLink href="/admin/users" passHref>
-                <a>
-                  <div className={styles.profilelink}>Users</div>
-                </a>
-              </NextLink>
-            </div>
-          ) : null}
-        </div>
+        <Adminside userInfo={userInfo} />
         <div className={styles.orderhistcontainer__right}>
           <h4 className={styles.profilefield__title}>PROFILE </h4>
           <Formik
