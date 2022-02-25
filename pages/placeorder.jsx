@@ -11,7 +11,20 @@ import CheckoutWizard from '../components/CheckoutWizard';
 
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, withStyles, Button } from '@material-ui/core';
+import yellow from '@material-ui/core/colors/yellow';
+
+const ColorButton = withStyles(() => ({
+  root: {
+    color: '#fff',
+    backgroundColor: yellow[800],
+    fontSize: '20px',
+    fontFamily: 'Bebas Neue',
+    '&:hover': {
+      backgroundColor: yellow[900],
+    },
+  },
+}))(Button);
 
 function Placeorder() {
   const [loading, setLoading] = useState(false);
@@ -89,7 +102,7 @@ function Placeorder() {
       setLoading(false);
       Toast.fire({
         icon: 'error',
-        title: err.response.data.message,
+        title: err,
       });
     }
   };
@@ -110,41 +123,41 @@ function Placeorder() {
       <div className={styles.placeordercontainer}>
         <div className={styles.placeordercontainer__child1}>
           <h4 className={styles.placeordercontainer__title}>ORDER INFO</h4>
-          <p className={styles.placeordercontainer__items}>
+          <div className={styles.placeordercontainer__items}>
             <span className={styles.placeordercontainer__items__title}>
               User:{' '}
             </span>
 
             {userInfo && userInfo.email}
-          </p>
-          <p className={styles.placeordercontainer__items}>
+          </div>
+          <div className={styles.placeordercontainer__items}>
             <span className={styles.placeordercontainer__items__title}>
               Phone:{' '}
             </span>
 
             {userInfo && userInfo.celphone}
-          </p>
-          <p className={styles.placeordercontainer__items}>
+          </div>
+          <div className={styles.placeordercontainer__items}>
             <span className={styles.placeordercontainer__items__title}>
               Student(s):{' '}
             </span>
             {shippingAddress && shippingAddress.student}
-          </p>
-          <p className={styles.placeordercontainer__items}>
+          </div>
+          <div className={styles.placeordercontainer__items}>
             <span className={styles.placeordercontainer__items__title}>
               Age:{' '}
             </span>
             {shippingAddress && shippingAddress.age}
-          </p>
+          </div>
 
           <div className={styles.placeordercontainer__hugo}>
-            <div className={styles.placeordercontainer__cart}>
+            <div>
               {cartItems.map((item) => (
                 <div
-                  className={styles.placeordercontainer__cart__items}
+                  className={styles.placeordercontainer__items}
                   key={item._id}
                 >
-                  <div className={styles.placeordercontainer__cart__items__u}>
+                  <div className={styles.placeordercontainer__items__title}>
                     <Image
                       src={item.image}
                       width={80}
@@ -153,13 +166,13 @@ function Placeorder() {
                     ></Image>
                   </div>
 
-                  <p className={styles.placeordercontainer__cart__items__u}>
+                  <p className={styles.placeordercontainer__cart__items__title}>
                     {item.name}
                   </p>
-                  <p className={styles.placeordercontainer__cart__items__u}>
+                  <p className={styles.placeordercontainer__cart__items__title}>
                     ${item.price}
                   </p>
-                  <p className={styles.placeordercontainer__cart__items__u}>
+                  <p className={styles.placeordercontainer__cart__items__title}>
                     {item.location}
                   </p>
                 </div>
@@ -173,12 +186,13 @@ function Placeorder() {
             {totalPrice} with {paymentMethod}
           </div>
           <div className={styles.cartcontainer__cartresume}>
-            <button
-              className={styles.cartcontainer__cartresume__button}
+            <ColorButton
+              className={styles.placeorder__button}
               onClick={placeOrderHandler}
+              variant="contained"
             >
               Place Order
-            </button>
+            </ColorButton>
           </div>
         </div>
       </div>

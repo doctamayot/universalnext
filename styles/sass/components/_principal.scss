@@ -98,17 +98,22 @@
       flex-direction: row;
       display: flex;
       justify-content: center;
+
       @include respond(tab-land) {
         margin-left: 5rem;
       }
     }
     &__red {
       color: rgb(178, 233, 69);
-      max-width: 25px;
-      padding: 0px;
+
+      padding: 2px;
       margin-left: 0.5rem;
+
+      &:hover {
+        cursor: pointer;
+      }
       @include respond(tab-land) {
-        max-width: 50px;
+        //max-width: 50px;
         margin-left: 1rem;
       }
     }

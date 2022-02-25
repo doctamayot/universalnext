@@ -1,5 +1,5 @@
 import styles from '../styles/sass/main.module.scss';
-import Link from 'next/link';
+
 import Image from 'next/image';
 
 import { FiFacebook, FiInstagram, FiTwitter, FiYoutube } from 'react-icons/fi';
@@ -24,31 +24,40 @@ const Principal = () => {
 
       <div className={styles.principal__main}>
         <div className={styles.principal__main__redes}>
-          <Link href="/">
-            <a>
-              <FiInstagram
-                className={styles.principal__main__red}
-                size="50px"
-              />
-            </a>
-          </Link>
-          <Link href="/">
-            <a>
-              <FiFacebook className={styles.principal__main__red} size="50px" />
-            </a>
-          </Link>
+          <a
+            className={styles.principal__main__red}
+            href="https://www.instagram.com/universalacting/?hl=en"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FiInstagram className={styles.principal__main__red} size="50px" />
+          </a>
+          <a
+            className={styles.principal__main__red}
+            href="https://www.facebook.com/UniversalActing/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FiFacebook className={styles.principal__main__red} size="50px" />
+          </a>
 
-          <Link href="/">
-            <a>
-              <FiYoutube className={styles.principal__main__red} size="50px" />
-            </a>
-          </Link>
+          <a
+            className={styles.principal__main__red}
+            href="https://www.youtube.com/channel/UCXVBPNvdeq6lHC62wepNBOw"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FiYoutube className={styles.principal__main__red} size="50px" />
+          </a>
 
-          <Link href="/">
-            <a>
-              <FiTwitter className={styles.principal__main__red} size="50px" />
-            </a>
-          </Link>
+          <a
+            className={styles.principal__main__red}
+            href="https://www.twitter.com/universalacting"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FiTwitter className={styles.principal__main__red} size="50px" />
+          </a>
         </div>
 
         <div className={styles.principal__image}>

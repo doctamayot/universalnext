@@ -178,8 +178,8 @@ const Messages = () => {
   return (
     <>
       <NextSeo
-        title="Universal Acting - Classes"
-        description="Universal Acting Classes "
+        title="Universal Acting - Messages"
+        description="Universal Acting Messages "
       />
       {loadingDelete && (
         <div className={styles.spinner}>
@@ -214,7 +214,7 @@ const Messages = () => {
                     />
                     <TextField
                       onChange={handleSearch}
-                      placeholder="Search By Student"
+                      placeholder="Search By Email"
                       className={styles.searchbox__input}
                     />
                   </div>

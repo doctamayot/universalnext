@@ -25,6 +25,11 @@
       font-size: 1.2rem;
       font-family: 'Bebas Neue', cursive;
       color: rgb(116, 107, 107);
+      &__item {
+        &:hover {
+          cursor: pointer;
+        }
+      }
       &__copy {
         color: rgb(157, 212, 47);
         font-size: 1.2rem;
@@ -97,21 +102,24 @@
     padding-left: 10px;
     border: 1px solid rgb(157, 212, 47);
     &__desc {
-      width: 80%;
+      width: 50%;
       margin: 10px 10px;
       padding-left: 10px;
       border: 1px solid rgb(157, 212, 47);
-      height: 100px;
+      height: 200px;
     }
   }
 
   &__button {
     height: 35px;
-    width: 80%;
+    width: 40%;
     margin: 0 auto;
     border: none;
     background-color: rgb(157, 212, 47);
     color: white;
+    &:hover {
+      cursor: pointer;
+    }
   }
   @include respond(tab-port) {
     display: grid;

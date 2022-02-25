@@ -6,6 +6,21 @@ import NextLink from 'next/link';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { Button, withStyles } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import yellow from '@material-ui/core/colors/yellow';
+
+const ColorButton = withStyles(() => ({
+  root: {
+    color: '#fff',
+    backgroundColor: yellow[800],
+    fontSize: '20px',
+    fontFamily: 'Bebas Neue',
+    '&:hover': {
+      backgroundColor: yellow[900],
+    },
+  },
+}))(Button);
 
 const Cart = () => {
   const router = useRouter();
@@ -35,7 +50,7 @@ const Cart = () => {
     <>
       <h4 className={styles.cartcontainer__title}>Shopping Cart</h4>
       {cartItems.length === 0 ? (
-        <div>
+        <div className={styles.cartcontainer__title}>
           Cart is empty.{' '}
           <NextLink href="/" passHref>
             <a>Go shopping</a>
@@ -64,12 +79,15 @@ const Cart = () => {
                   </select>
 
                   <p>${item.price}</p>
-                  <p
+                  <Button
                     className={styles.cartcontainer__articles__article__remove}
                     onClick={() => removeItemHandler(item)}
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<DeleteIcon />}
                   >
-                    X
-                  </p>
+                    Delete
+                  </Button>
                 </div>
               </div>
             </div>
@@ -81,12 +99,14 @@ const Cart = () => {
               : ${cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
             </h2>
 
-            <button
+            <ColorButton
               className={styles.cartcontainer__cartresume__button}
               onClick={checkoutHandler}
+              color="primary"
+              variant="contained"
             >
               CheckOut
-            </button>
+            </ColorButton>
           </div>
         </div>
       )}

@@ -8,8 +8,9 @@
 
   &__title {
     text-align: center;
-    font-size: 3rem;
+    font-size: 5rem;
     margin-top: 30px;
+    font-family: 'Bebas Neue', cursive;
     @include respond(tab-land) {
       width: 100%;
       margin-bottom: 30px;
@@ -21,8 +22,11 @@
     font-size: 3rem;
     margin-top: 30px;
 
+    &__subtotal {
+      margin-bottom: 40px;
+    }
+
     &__button {
-      background-color: rgb(228, 215, 44);
       padding: 10px;
       font-family: 'Bebas Neue', cursive;
       border: none;
@@ -30,13 +34,14 @@
       width: 70%;
       cursor: pointer;
       font-size: 2rem;
+      height: 50px;
       &:hover {
         background-color: rgb(105, 104, 102);
       }
       @include respond(tab-land) {
-        width: 80%;
-        margin: 20px 20px;
-        height: 80px;
+        width: 30%;
+
+        height: 50px;
       }
     }
     @include respond(tab-land) {

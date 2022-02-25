@@ -28,7 +28,7 @@ handler.post(async (req, res) => {
     students.forEach(function (cel) {
       twilio.messages
         .create({
-          to: `57${cel.celphone}`,
+          to: `1${cel.celphone}`,
           body: `Hello, don´t forget that ${product.shedule}, the student ${cel.user} will have the class ${product.name} in the ${product.location} studio of Universal Casting  `,
           from: '3056778471',
         })

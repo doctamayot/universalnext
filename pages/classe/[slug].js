@@ -68,7 +68,6 @@ export default function ProductScreen(props) {
     //   return;
     // }
     console.log(data);
-
     Cookies.set('clase', JSON.stringify(product._id));
     dispatch({ type: 'SAVE_CLASS', payload: product._id });
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
