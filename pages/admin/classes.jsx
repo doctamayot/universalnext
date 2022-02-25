@@ -328,7 +328,7 @@ const Classes = () => {
                     />
                     <TextField
                       onChange={handleSearch}
-                      placeholder="Search By Student"
+                      placeholder="Search By Class"
                       className={styles.searchbox__input}
                     />
                   </div>
