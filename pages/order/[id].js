@@ -9,7 +9,11 @@ import { useRouter } from 'next/router';
 import styles from '../../styles/sass/main.module.scss';
 //import CheckoutWizard from '../../components/CheckoutWizard';
 import moment from 'moment';
-
+import {
+  AchPay,
+  CreditCardInput,
+  SquarePaymentsForm,
+} from 'react-square-web-payments-sdk';
 import { getError } from '../../utils/error';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { CircularProgress, ListItem } from '@material-ui/core';
@@ -50,6 +54,7 @@ function reducer(state, action) {
 }
 
 const Order = ({ params }) => {
+  const [squarepay, setSquarepay] = React.useState(false);
   const orderId = params.id;
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const router = useRouter();
@@ -77,6 +82,8 @@ const Order = ({ params }) => {
     //isDelivered,
     //deliveredAt,
   } = order;
+
+  console.log(paymentMethod);
 
   useEffect(() => {
     if (!userInfo) {
@@ -123,6 +130,47 @@ const Order = ({ params }) => {
       loadPaypalScript();
     }
   }, [order, successPay, successDeliver]);
+
+  useEffect(() => {
+    if (squarepay) {
+      const udpateOrder = async () => {
+        try {
+          dispatch({ type: 'PAY_REQUEST' });
+          const { data } = axios.put(
+            `/api/orders/${order._id}/pay`,
+            {},
+            {
+              headers: { authorization: `Bearer ${userInfo.token}` },
+            }
+          );
+          dispatch({ type: 'PAY_SUCCESS', payload: data });
+          Toast.fire({
+            icon: 'success',
+            title: 'Payment Success',
+          });
+        } catch (err) {
+          dispatch({ type: 'PAY_FAIL', payload: getError(err) });
+          Toast.fire({
+            icon: 'error',
+            title: 'Error',
+          });
+        }
+      };
+      const fetchOrder = async () => {
+        try {
+          dispatch({ type: 'FETCH_REQUEST' });
+          const { data } = await axios.get(`/api/orders/${orderId}`, {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          });
+          dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        } catch (err) {
+          dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+        }
+      };
+      udpateOrder();
+      fetchOrder();
+    }
+  }, [squarepay, order]);
 
   function createOrder(data, actions) {
     return actions.order
@@ -206,6 +254,38 @@ const Order = ({ params }) => {
       title: getError(err),
     });
   }
+
+  const square = async (token) => {
+    try {
+      const response = await fetch('/api/paySuare', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+        body: JSON.stringify({
+          sourceId: token.token,
+          amount: totalPrice,
+        }),
+      });
+      if (response.status === 200) {
+        setSquarepay(true);
+      }
+
+      if (response.status != 200) {
+        Toast.fire({
+          icon: 'error',
+          title: 'Transaction Rejected, Call your Bank',
+        });
+      }
+    } catch (err) {
+      Toast.fire({
+        icon: 'error',
+        title: 'Transaction Rejected',
+      });
+      //console.log(err.message);
+    }
+  };
 
   return (
     <>
@@ -310,7 +390,7 @@ const Order = ({ params }) => {
               />
             </ListItem>
           )}
-          {!isPaid && (
+          {!isPaid && paymentMethod === 'Paypal' && (
             <div>
               {isPending ? (
                 <CircularProgress />
@@ -324,6 +404,18 @@ const Order = ({ params }) => {
                 </div>
               )}
             </div>
+          )}
+
+          {!isPaid && paymentMethod === 'Square' && (
+            <SquarePaymentsForm
+              applicationId="sq0idp-D4NAPq4X0ENkRCxUlGkbVA"
+              locationId="2FMPMZ3C4Z8FD"
+              cardTokenizeResponseReceived={square}
+            >
+              <CreditCardInput />
+              <div className={styles.botonsquare}></div>
+              <AchPay accountHolderName="Universal Acting" />
+            </SquarePaymentsForm>
           )}
         </div>
       </div>

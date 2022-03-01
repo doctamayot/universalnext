@@ -25,8 +25,7 @@ export default function Shipping() {
     desc: Yup.string()
       .min(10, 'Description too short')
       .max(125, 'Description too large')
-      .required('Description is required')
-      .matches(/^[aA-zZ\s,.,]+$/, 'Only alphabets are allowed for this field '),
+      .required('Description is required'),
   });
 
   const router = useRouter();
