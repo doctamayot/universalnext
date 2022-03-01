@@ -61,7 +61,12 @@ const Principal = () => {
         </div>
 
         <div className={styles.principal__image}>
-          <Image src="/img/principa.png" alt="" width={510} height={489} />
+          <Image
+            src="/img/principa.png"
+            alt="universal Acting"
+            width={510}
+            height={489}
+          />
         </div>
       </div>
     </div>

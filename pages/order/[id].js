@@ -407,15 +407,26 @@ const Order = ({ params }) => {
           )}
 
           {!isPaid && paymentMethod === 'Square' && (
-            <SquarePaymentsForm
-              applicationId="sq0idp-D4NAPq4X0ENkRCxUlGkbVA"
-              locationId="2FMPMZ3C4Z8FD"
-              cardTokenizeResponseReceived={square}
-            >
-              <CreditCardInput />
-              <div className={styles.botonsquare}></div>
-              <AchPay accountHolderName="Universal Acting" />
-            </SquarePaymentsForm>
+            <div>
+              <div className={styles.logosquare}>
+                <Image
+                  src="/img/square.jpg"
+                  alt="square"
+                  width={384}
+                  height={216}
+                />
+              </div>
+
+              <SquarePaymentsForm
+                applicationId="sq0idp-D4NAPq4X0ENkRCxUlGkbVA"
+                locationId="2FMPMZ3C4Z8FD"
+                cardTokenizeResponseReceived={square}
+              >
+                <CreditCardInput />
+                <div className={styles.botonsquare}></div>
+                <AchPay accountHolderName="Universal Acting" />
+              </SquarePaymentsForm>
+            </div>
           )}
         </div>
       </div>
