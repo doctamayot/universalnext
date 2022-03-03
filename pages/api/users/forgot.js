@@ -15,8 +15,9 @@ handler.post(async (req, res) => {
       error: 'User with that email does not exist',
     });
   }
+
   // generate token and email to user
-  const token = jwt.sign(
+  const token = await jwt.sign(
     { name: user.firstname },
     process.env.JWT_RESET_PASSWORD,
     {
@@ -26,33 +27,35 @@ handler.post(async (req, res) => {
   //
   // send email
 
-  const { email } = req.body;
+  return user.updateOne({ resetPasswordLink: token }, (err) => {
+    if (err) {
+      return res.status(400).json({
+        error: 'Password reset failed. Try later.',
+      });
+    }
 
-  //forgotPassword(email, token);
-  const sgMail = require('@sendgrid/mail');
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  const msg = {
-    to: { email },
-    from: 'universalactinginfo@gmail.com',
-    subject: 'Reset Password Link',
-    html: `<p>Please use the following link to reset your password:</p>
+    const { email } = req.body;
+
+    //res.send({ message: 'Email Sent', user });
+
+    //forgotPassword(email, token);
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: { email },
+      from: 'universalactinginfo@gmail.com',
+      subject: 'Reset Password Link',
+      html: `<p>Please use the following link to reset your password:</p>
           <p>${process.env.CLIENT_URL}/reset/${token}</p>`,
-  };
-  try {
-    await sgMail.send(msg);
-    //res.status(200).send('Message sent successfully.')
-  } catch (error) {
-    console.log('ERROR', error);
-    //res.status(400).send('Message not sent.')
-  }
-
-  user.resetPasswordLink = token;
-
-  user.save();
-
-  await db.disconnect();
-  res.send({ message: 'Email Sent', user });
-  await db.disconnect();
+    };
+    try {
+      sgMail.send(msg);
+      res.status(200).send('Message sent successfully.');
+    } catch (error) {
+      console.log('ERROR', error);
+      res.status(400).send('Message not sent.');
+    }
+  });
 });
 
 export default handler;
