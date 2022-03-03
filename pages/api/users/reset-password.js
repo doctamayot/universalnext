@@ -10,14 +10,16 @@ handler.put(async (req, res) => {
   const { resetPasswordLink, password } = req.body;
 
   if (resetPasswordLink) {
-    // check for expiry
+    //check for expiry
     jwt.verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD, (err) => {
       if (err) {
-        res.status(401).send({ message: 'Token is not valid' });
+        caches.log(err);
+        res.status(401).send({ message: err });
       }
     });
 
     const user = await User.findOne({ resetPasswordLink });
+
     user.password = password ? bcrypt.hashSync(password) : user.password;
     user.resetPasswordLink = '';
     await user.save();

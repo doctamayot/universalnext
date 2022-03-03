@@ -2,7 +2,7 @@ import nc from 'next-connect';
 import User from '../../../models/User';
 import db from '../../../utils/db';
 import jwt from 'jsonwebtoken';
-import { forgotPassword } from '../keys/sengrid';
+import { sendEmail } from '../keys/sengrid';
 
 const handler = nc();
 
@@ -14,7 +14,6 @@ handler.post(async (req, res) => {
       error: 'User with that email does not exist',
     });
   }
-  await db.disconnect();
   // generate token and email to user
   const token = jwt.sign(
     { name: user.firstname },
@@ -23,11 +22,19 @@ handler.post(async (req, res) => {
       expiresIn: '10m',
     }
   );
-  res.send({ message: 'Email Sent', user });
+  //
   // send email
+
   const { email } = req.body;
-  forgotPassword(email, token);
-  return user.updateOne({ resetPasswordLink: token });
+
+  sendEmail(email, token);
+  user.resetPasswordLink = token;
+
+  user.save();
+
+  await db.disconnect();
+  res.send({ message: 'Email Sent', user });
+  await db.disconnect();
 });
 
 export default handler;

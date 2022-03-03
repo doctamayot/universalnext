@@ -79,10 +79,11 @@ const ResetPassword = ({ router }) => {
     try {
       dispatch({ type: 'RESET_REQUEST' });
       const { password } = values;
-      await axios.put('/api/users/reset-password', {
+      const { data } = await axios.put('/api/users/reset-password', {
         resetPasswordLink: token,
         password,
       });
+      console.log(data);
       dispatch({ type: 'RESET_SUCCESS' });
       Toast.fire({
         icon: 'success',
@@ -93,7 +94,7 @@ const ResetPassword = ({ router }) => {
       dispatch({ type: 'RESET_FAIL' });
       Toast.fire({
         icon: 'error',
-        title: 'Token is not valid ... Try again ',
+        title: 'Token not valid. Try again',
       });
     }
   };
