@@ -13,14 +13,25 @@
   }
 
   &__grid {
+    background-image: linear-gradient(
+      to right top,
+      #e2e9f2,
+      #9ef0ff,
+      #1bf9f0,
+      #3bf9a0,
+      #a8eb12
+    );
     @include respond(tab-port) {
       display: grid;
       gap: 50px;
       grid-template-columns: repeat(10, 1fr);
       grid-auto-rows: minmax(auto);
+      box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+        rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+        rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     }
     @include respond(big-desktop) {
-      padding: 0 200px;
+      padding: 50px 200px;
     }
 
     &__image1 {
