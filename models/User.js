@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
     isActive: { type: Boolean, default: false },
+    resetPasswordLink: { type: String, default: 'hola' },
   },
   {
     timestamps: true,

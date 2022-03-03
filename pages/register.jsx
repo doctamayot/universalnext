@@ -213,7 +213,7 @@ const Register = () => {
                   className={styles.logincontact__discampo__label}
                   htmlFor="confirmpassword"
                 >
-                  Password
+                  Confirm Password
                 </label>
                 <Field
                   type="password"

@@ -1,26 +1,42 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useReducer } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles/sass/main.module.scss';
-import NextLink from 'next/link';
+
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { Store } from '../utils/Store';
-import Cookies from 'js-cookie';
+
 import Swal from 'sweetalert2';
 import { NextSeo } from 'next-seo';
+import { CircularProgress } from '@material-ui/core';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'FORGOT_REQUEST':
+      return { ...state, loadingSms: true };
+    case 'FORGOT_SUCCESS':
+      return { ...state, loadingSms: false };
+    case 'FORGOT_FAIL':
+      return { ...state, loadingSms: false };
+  }
+}
 
 const Login = () => {
   const router = useRouter();
-  const { redirect } = router.query; // login?redirect=/shipping
-  const { state, dispatch } = useContext(Store);
+  // const { redirect } = router.query; // login?redirect=/shipping
+  const { state } = useContext(Store);
   const { userInfo } = state;
+
+  const [{ loadingSms }, dispatch] = useReducer(reducer, {
+    loadingSms: false,
+  });
 
   const Toast = Swal.mixin({
     toast: true,
     position: 'center',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 6000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -36,46 +52,45 @@ const Login = () => {
 
   const loginSchema = Yup.object().shape({
     email: Yup.string().email('Email not valid').required('Email is required'),
-    password: Yup.string()
-      .min(6, 'Password too short')
-      .max(20, 'Password too large')
-      .required('Password is required'),
   });
 
   const submitHandler = async (values) => {
     try {
-      const { email, password } = values;
-      const { data } = await axios.post('/api/users/login', {
+      dispatch({ type: 'FORGOT_REQUEST' });
+      const { email } = values;
+
+      await axios.post('/api/users/forgot', {
         email,
-        password,
       });
 
+      dispatch({ type: 'FORGOT_SUCCESS' });
       Toast.fire({
         icon: 'success',
-        title: 'Signed in successfully',
+        title: `Email has been sent to ${email}. Click on the link to reset your password`,
       });
-      dispatch({ type: 'USER_LOGIN', payload: data });
-      Cookies.set('userInfo', JSON.stringify(data));
-      router.push(redirect || '/');
+      //   dispatch({ type: 'USER_LOGIN', payload: data });
+      //   Cookies.set('userInfo', JSON.stringify(data));
+      //   router.push(redirect || '/');
     } catch (err) {
+      dispatch({ type: 'FORGOT_FAIL' });
       Toast.fire({
         icon: 'error',
-        title: err.response.data ? err.response.data.message : err.message,
+        title: err.response.data ? err.response.data.error : err.error,
       });
     }
   };
+
   return (
     <>
       <NextSeo
-        title="Universal Acting - Login"
-        description="Universal Acting Login "
+        title="Universal Acting - Forgot Password"
+        description="Universal Acting Forgot Password "
       />
-      <h4 className={styles.logincontact__title}>LOGIN </h4>
+      <h4 className={styles.logincontact__title}>Reset your password</h4>
       <Formik
         validationSchema={loginSchema}
         initialValues={{
           email: '',
-          password: '',
         }}
         onSubmit={async (values, { resetForm }) => {
           await submitHandler(values);
@@ -103,44 +118,19 @@ const Login = () => {
                   <p className={styles.formerror}>{errors.email}</p>
                 ) : null}
               </div>
-              <div className={styles.logincontact__discampo}>
-                <label
-                  className={styles.logincontact__discampo__label}
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <Field
-                  type="password"
-                  className={styles.logincontact__campo}
-                  placeholder="Password"
-                  id="password"
-                  name="password"
-                />
-                {errors.password && touched.password ? (
-                  <p className={styles.formerror}>{errors.password}</p>
-                ) : null}
-              </div>
+
               <div className={styles.logincontact__discampo}>
                 <input
                   type="submit"
-                  value="LOGIN"
+                  value="Send"
                   className={styles.logincontact__button}
                 />
               </div>
-              <div className={styles.logincontact__note}>
-                Don`t have an account?
-                <NextLink href="/register" passHref>
-                  <a className={styles.logincontact__note__title}>Register</a>
-                </NextLink>
-              </div>
-              <div className={styles.logincontact__note}>
-                <NextLink href="/forgot" passHref>
-                  <a className={styles.logincontact__note__title2}>
-                    Forgot password?
-                  </a>
-                </NextLink>
-              </div>
+              {loadingSms && (
+                <div className={styles.spinner}>
+                  <CircularProgress />
+                </div>
+              )}
             </Form>
           );
         }}
