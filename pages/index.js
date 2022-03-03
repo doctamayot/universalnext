@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo';
 import Jobs from '../components/Jobs';
 import Mision from '../components/Mision';
 import Principal from '../components/Principal';
-
+import Head from 'next/head';
 import styles from '../styles/sass/main.module.scss';
 import Image from 'next/image';
 import NextLink from 'next/link';
@@ -15,6 +15,12 @@ export default function Home(props) {
 
   return (
     <>
+      <Head>
+        <meta
+          name="keywords"
+          content="acting school, acting schools, acting school Miami, how to become an actor, acting classes, study acting, kids classes, kids acting, teens classe, teens acting"
+        />
+      </Head>
       <NextSeo
         title="How to become an Actors - Universal Acting"
         description="Universal Acting will educate and guide students to work, develop, and strengthen their craft, while encouraging verbal communication, mental spontaneity, self-confidence, and social interaction.
@@ -23,6 +29,7 @@ export default function Home(props) {
         Our variety of instructors and class levels will meet the needs of aspiring beginners, as well as the seasoned actor.
         The classes will develop and enhance a student’s potential as an actor, while nurturing his/her talents, creativity, and self-esteem.
         The philosophy of U.A. is to serve those who possess a strong commitment to their craft and to provide them with the guidance and tools they will need in order to cultivate and develop their talent."
+        keywords="acting school, acting schools, acting school Miami, how to become an actor, acting classes, study acting, kids classes, kids acting, teens classe, teens acting"
       />
 
       <Principal />
