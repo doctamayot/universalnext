@@ -135,11 +135,12 @@ const Login = () => {
                 </NextLink>
               </div>
               <div className={styles.logincontact__note}>
-                <NextLink href="/forgot" passHref>
-                  <a className={styles.logincontact__note__title2}>
-                    Forgot password?
-                  </a>
-                </NextLink>
+                <a
+                  href="https://universalnext2-108yzt2c1-doctamayot.vercel.app/forgot"
+                  className={styles.logincontact__note__title2}
+                >
+                  Forgot password?
+                </a>
               </div>
             </Form>
           );

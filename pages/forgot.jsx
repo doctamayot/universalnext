@@ -64,7 +64,7 @@ const Login = () => {
       });
 
       dispatch({ type: 'FORGOT_SUCCESS' });
-      Toast.fire({
+      await Toast.fire({
         icon: 'success',
         title: `Email has been sent to ${email}. Click on the link to reset your password, Look in spam in hotmail`,
       });
