@@ -27,7 +27,7 @@ handler.post(async (req, res) => {
   //
   // send email
 
-  return user.updateOne({ resetPasswordLink: token }, (err) => {
+  return await user.updateOne({ resetPasswordLink: token }, (err) => {
     if (err) {
       return res.status(400).json({
         error: 'Password reset failed. Try later.',
