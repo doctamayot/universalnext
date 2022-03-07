@@ -1,5 +1,5 @@
 import styles from '../styles/sass/main.module.scss';
-
+import NextLink from 'next/link';
 import Image from 'next/image';
 
 import { FiFacebook, FiInstagram, FiTwitter, FiYoutube } from 'react-icons/fi';
@@ -16,9 +16,11 @@ const Principal = () => {
             The classes will develop and enhance a students potential as an
             actor, while nurturing his/her talents, creativity, and self-esteem.
           </p>
-          <button className={styles.principal__main__button}>
-            View Classes
-          </button>
+          <NextLink href="/classes" passHref>
+            <button className={styles.principal__main__button}>
+              View Classes
+            </button>
+          </NextLink>
         </div>
       </div>
 
