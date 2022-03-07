@@ -40,10 +40,8 @@ handler.post(async (req, res) => {
 
     //forgotPassword(email, token);
     const sgMail = require('@sendgrid/mail');
-    //sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    sgMail.setApiKey(
-      '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'
-    );
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
     const msg = {
       to: { email },
       from: 'universalactinginfo@gmail.com',
