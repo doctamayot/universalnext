@@ -13,7 +13,7 @@ const Principal = () => {
             Acting Classes for kids and Adults that deliver results
           </h1>
           <p className={styles.principal__main__parr}>
-            The classes will develop and enhance a student’s potential as an
+            The classes will develop and enhance a students potential as an
             actor, while nurturing his/her talents, creativity, and self-esteem.
           </p>
           <button className={styles.principal__main__button}>
