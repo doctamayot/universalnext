@@ -2,7 +2,7 @@
   background-color: rgb(111, 109, 245);
   display: flex;
   border-radius: 0% 0% 38% 59% / 0% 0% 21% 21%;
-  height: 30rem;
+  height: 45rem;
 
   @include respond(tab-land) {
     height: 75vh;
@@ -42,13 +42,18 @@
       }
     }
     &__title {
-      font-size: 2.9rem;
+      font-size: 2rem;
       color: rgb(255, 255, 255);
       line-height: 25px;
       font-family: 'Bebas Neue', cursive;
       letter-spacing: 2px;
       text-align: left;
       @include respond(phone) {
+        font-size: 2rem;
+        line-height: 35px;
+      }
+
+      @include respond(tab-port) {
         font-size: 4rem;
         line-height: 35px;
       }
@@ -64,6 +69,11 @@
       margin-top: 10px;
       font-family: 'Dosis', sans-serif;
       @include respond(phone) {
+        font-size: 1.5rem;
+        line-height: 25px;
+      }
+
+      @include respond(tab-port) {
         font-size: 2rem;
         line-height: 25px;
       }
