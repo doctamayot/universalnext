@@ -49,13 +49,10 @@ handler.post(async (req, res) => {
       html: `<p>Please use the following link to reset your password:</p>
           <p>${process.env.CLIENT_URL}/reset/${token}</p>`,
     };
-    try {
-      sgMail.send(msg);
+
+    sgMail.send(msg).then(() => {
       res.status(200).send('Message sent successfully.');
-    } catch (error) {
-      console.log('ERROR', error);
-      res.status(400).send('Message not sent.');
-    }
+    });
   });
 });
 
