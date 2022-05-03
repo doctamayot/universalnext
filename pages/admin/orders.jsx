@@ -76,6 +76,8 @@ function AdminDashboard() {
     error: '',
   });
 
+  
+
   useEffect(() => {
     if (!userInfo.isAdmin) {
       router.push('/');
@@ -110,6 +112,8 @@ function AdminDashboard() {
       },
     });
   };
+
+  
 
   return (
     <>
@@ -146,7 +150,9 @@ function AdminDashboard() {
                   {recordsAfterPagingAndSorting().map((order) => (
                     <TableRow key={order._id}>
                       <TableCell>{order._id.substring(20, 24)}</TableCell>
-                      <TableCell>{order.orderItems[0].name}</TableCell>
+                      <TableCell>{order.orderItems.map(n => (
+                        n.name
+                      ))}</TableCell>
                       <TableCell>
                         {' '}
                         {order.user ? (
