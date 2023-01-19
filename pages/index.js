@@ -1,14 +1,17 @@
-import Comments from '../components/Comments';
-import { NextSeo } from 'next-seo';
-import Jobs from '../components/Jobs';
-import Mision from '../components/Mision';
-import Principal from '../components/Principal';
-import Head from 'next/head';
-import styles from '../styles/sass/main.module.scss';
-import Image from 'next/image';
-import NextLink from 'next/link';
-import db from '../utils/db';
-import Product from '../models/Product';
+import Comments from "../components/Comments";
+import { NextSeo } from "next-seo";
+import Jobs from "../components/Jobs";
+import Mision from "../components/Mision";
+import Principal from "../components/Principal";
+import Head from "next/head";
+import styles from "../styles/sass/main.module.scss";
+import Image from "next/image";
+import NextLink from "next/link";
+import db from "../utils/db";
+import Product from "../models/Product";
+import { BsWhatsapp } from "react-icons/bs";
+
+const mensaje = `https://api.whatsapp.com/send?phone=4917636877467&text=Hi%20!!!`;
 
 export default function Home(props) {
   const { products } = props;
@@ -31,6 +34,12 @@ export default function Home(props) {
         The philosophy of U.A. is to serve those who possess a strong commitment to their craft and to provide them with the guidance and tools they will need in order to cultivate and develop their talent."
         keywords="acting school, acting schools, acting school Miami, how to become an actor, acting classes, study acting, kids classes, kids acting, teens classe, teens acting"
       />
+
+      <div className="whatsapp2">
+        <a href={mensaje} rel="noreferrer" target="_blank">
+          <BsWhatsapp className="iconow2" />
+        </a>
+      </div>
 
       <Principal />
       <div className={styles.container}>
@@ -75,19 +84,19 @@ export default function Home(props) {
                 <ul className={styles.classlist__item__varios}>
                   <li className={styles.classlist__item__varios__li}>
                     <span>
-                      Age:{' '}
+                      Age:{" "}
                       <span className={styles.classlist__item__varios__li__res}>
                         {classe.age} years
-                      </span>{' '}
+                      </span>{" "}
                     </span>
                   </li>
                   <li className={styles.classlist__item__varios__li}>
                     <span>
                       Duration:
                       <span className={styles.classlist__item__varios__li__res}>
-                        {' '}
+                        {" "}
                         {classe.duration}
-                      </span>{' '}
+                      </span>{" "}
                     </span>
                   </li>
 
@@ -96,10 +105,10 @@ export default function Home(props) {
                   </li>
                   <li className={styles.classlist__item__varios__li}>
                     <span>
-                      Places:{' '}
+                      Places:{" "}
                       <span className={styles.classlist__item__varios__li__res}>
                         {classe.countInStock} Student(s)
-                      </span>{' '}
+                      </span>{" "}
                     </span>
                   </li>
 
@@ -133,7 +142,7 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   await db.connect();
-  const products = await Product.find({}, '-students').lean();
+  const products = await Product.find({}, "-students").lean();
   await db.disconnect();
 
   return {

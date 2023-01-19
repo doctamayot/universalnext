@@ -8,6 +8,24 @@
     height: 75vh;
   }
 
+  &__whatsapp{
+    background-color:#25D366;
+  font-size: 20px;
+  color:white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 160px;
+  margin-top: 20px;
+  margin-left:60px ;
+  position:relative;
+  font-family: 'Bebas Neue', cursive;
+ 
+  }
+  
+  &__iconow{
+    font-size: 15px;
+  }
+
   &__image {
     max-width: 100%;
     @include respond(tab-port) {
