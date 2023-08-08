@@ -11,7 +11,7 @@ import db from "../utils/db";
 import Product from "../models/Product";
 import { BsWhatsapp } from "react-icons/bs";
 
-const mensaje = `https://api.whatsapp.com/send?phone=4917636877467&text=Hi universal acting%20!!!`;
+const mensaje = `https://api.whatsapp.com/send?phone=573177936776&text=Hi universal acting%20!!!`;
 
 export default function Home(props) {
   const { products } = props;
