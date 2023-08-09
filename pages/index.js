@@ -7,14 +7,32 @@ import Head from "next/head";
 import styles from "../styles/sass/main.module.scss";
 import Image from "next/image";
 import NextLink from "next/link";
-import db from "../utils/db";
-import Product from "../models/Product";
+// import db from "../utils/db";
+// import Product from "../models/Product";
 import { BsWhatsapp } from "react-icons/bs";
+import { useEffect, useState } from "react";
 
 const mensaje = `https://api.whatsapp.com/send?phone=573177936776&text=Hi universal acting%20!!!!!`;
 
-export default function Home(props) {
-  const { products } = props;
+export default function Home() {
+  const [products, setProducts] = useState([]);
+  //const [loading, setLoading] = useState(true);
+  // const { products } = props;
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:3000/api/products");
+        const jsonData = await response.json();
+        setProducts(jsonData);
+        console.log(products);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -140,14 +158,14 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps() {
-  await db.connect();
-  const products = await Product.find({}, "-students").lean();
-  await db.disconnect();
+// export async function getServerSideProps() {
+//   await db.connect();
+//   const products = await Product.find({}, "-students").lean();
+//   await db.disconnect();
 
-  return {
-    props: {
-      products: products.map(db.convertDocToObj),
-    },
-  };
-}
+//   return {
+//     props: {
+//       products: products.map(db.convertDocToObj),
+//     },
+//   };
+//}
