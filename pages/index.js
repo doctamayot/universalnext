@@ -12,29 +12,19 @@ import NextLink from "next/link";
 import { BsWhatsapp } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
+import useSWR from "swr";
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
 const mensaje = `https://api.whatsapp.com/send?phone=573177936776&text=Hi universal acting%20!!!!!`;
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
   //const [loading, setLoading] = useState(true);
   // const { products } = props;
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          "https://universalacting.com/api/products"
-        );
-        const jsonData = await response.json();
-        setProducts(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-
-    fetchData();
-  }, []);
+  const { data: products } = useSWR("/api/products", fetcher);
   console.log(products);
+
   return (
     <>
       <Head>
@@ -78,77 +68,84 @@ export default function Home() {
         </p>
         <ul>
           <div className={styles.classlist}>
-            {products.map((classe) => (
-              <div key={classe._id} className={styles.classlist__item}>
-                <div className={styles.classlist__item__title}>
-                  {classe.name}
-                  <h5 className={styles.classlist__item__title__location}>
-                    {classe.location}
-                  </h5>
-                  <h5 className={styles.classlist__item__title__category}>
-                    {classe.category}
-                  </h5>
-                </div>
-                <div className={styles.classlist__item__image}>
-                  <Image
-                    src={classe.image}
-                    width={476}
-                    height={317}
-                    alt="kids"
-                  />
-                </div>
-                <p className={styles.classlist__item__parrafo}>
-                  {classe.subtitle}
-                </p>
-                <ul className={styles.classlist__item__varios}>
-                  <li className={styles.classlist__item__varios__li}>
-                    <span>
-                      Age:{" "}
-                      <span className={styles.classlist__item__varios__li__res}>
-                        {classe.age} years
-                      </span>{" "}
-                    </span>
-                  </li>
-                  <li className={styles.classlist__item__varios__li}>
-                    <span>
-                      Duration:
-                      <span className={styles.classlist__item__varios__li__res}>
-                        {" "}
-                        {classe.duration}
-                      </span>{" "}
-                    </span>
-                  </li>
+            {products &&
+              products.map((classe) => (
+                <div key={classe._id} className={styles.classlist__item}>
+                  <div className={styles.classlist__item__title}>
+                    {classe.name}
+                    <h5 className={styles.classlist__item__title__location}>
+                      {classe.location}
+                    </h5>
+                    <h5 className={styles.classlist__item__title__category}>
+                      {classe.category}
+                    </h5>
+                  </div>
+                  <div className={styles.classlist__item__image}>
+                    <Image
+                      src={classe.image}
+                      width={476}
+                      height={317}
+                      alt="kids"
+                    />
+                  </div>
+                  <p className={styles.classlist__item__parrafo}>
+                    {classe.subtitle}
+                  </p>
+                  <ul className={styles.classlist__item__varios}>
+                    <li className={styles.classlist__item__varios__li}>
+                      <span>
+                        Age:{" "}
+                        <span
+                          className={styles.classlist__item__varios__li__res}
+                        >
+                          {classe.age} years
+                        </span>{" "}
+                      </span>
+                    </li>
+                    <li className={styles.classlist__item__varios__li}>
+                      <span>
+                        Duration:
+                        <span
+                          className={styles.classlist__item__varios__li__res}
+                        >
+                          {" "}
+                          {classe.duration}
+                        </span>{" "}
+                      </span>
+                    </li>
 
-                  <li className={styles.classlist__item__varios__li}>
-                    <span>Sessions: {classe.days} </span>
-                  </li>
-                  <li className={styles.classlist__item__varios__li}>
-                    <span>
-                      Places:{" "}
-                      <span className={styles.classlist__item__varios__li__res}>
-                        {classe.countInStock} Student(s)
-                      </span>{" "}
-                    </span>
-                  </li>
+                    <li className={styles.classlist__item__varios__li}>
+                      <span>Sessions: {classe.days} </span>
+                    </li>
+                    <li className={styles.classlist__item__varios__li}>
+                      <span>
+                        Places:{" "}
+                        <span
+                          className={styles.classlist__item__varios__li__res}
+                        >
+                          {classe.countInStock} Student(s)
+                        </span>{" "}
+                      </span>
+                    </li>
 
-                  {/* {classe.days.map((day) => (
+                    {/* {classe.days.map((day) => (
         <div key={day}>{day[0]}</div>
       ))} */}
-                </ul>
+                  </ul>
 
-                <p className={styles.classlist__item__precio}>
-                  ${classe.price}
-                </p>
+                  <p className={styles.classlist__item__precio}>
+                    ${classe.price}
+                  </p>
 
-                <NextLink href={`/classe/${classe.slug}`} passHref>
-                  <div className={styles.classlist__item__divboton}>
-                    <button className={styles.classlist__item__boton}>
-                      Book Now
-                    </button>
-                  </div>
-                </NextLink>
-              </div>
-            ))}
+                  <NextLink href={`/classe/${classe.slug}`} passHref>
+                    <div className={styles.classlist__item__divboton}>
+                      <button className={styles.classlist__item__boton}>
+                        Book Now
+                      </button>
+                    </div>
+                  </NextLink>
+                </div>
+              ))}
           </div>
         </ul>
       </div>

@@ -28,8 +28,6 @@ export default function handler(req, res) {
 async function getProducts(req, res) {
   await db.connect();
   const products = await Product.find();
-  console.log("hola hugo");
-  console.log(products);
   await db.disconnect();
 
   return res.status(200).json(products);
