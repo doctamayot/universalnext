@@ -10,7 +10,6 @@ import NextLink from "next/link";
 // import db from "../utils/db";
 // import Product from "../models/Product";
 import { BsWhatsapp } from "react-icons/bs";
-import { useEffect, useState } from "react";
 
 import useSWR from "swr";
 
