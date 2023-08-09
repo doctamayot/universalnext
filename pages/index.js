@@ -22,7 +22,9 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:3000/api/products");
+        const response = await fetch(
+          "https://universalacting.com/api/products"
+        );
         const jsonData = await response.json();
         setProducts(jsonData);
       } catch (error) {
