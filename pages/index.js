@@ -25,7 +25,6 @@ export default function Home() {
         const response = await fetch("http://localhost:3000/api/products");
         const jsonData = await response.json();
         setProducts(jsonData);
-        console.log(products);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -33,7 +32,7 @@ export default function Home() {
 
     fetchData();
   }, []);
-
+  console.log(products);
   return (
     <>
       <Head>
