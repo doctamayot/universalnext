@@ -16,11 +16,6 @@ const Layout = ({ children }) => {
 
   return (
     <div>
-      {/* <div className={styles.switch}>
-        <p>Darkmode</p>
-        <Switch value={darkMode} onChange={darkModeChangeHandler} />
-      </div> */}
-
       <Navigation />
       {children}
       <Footer />
