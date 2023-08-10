@@ -22,7 +22,6 @@ export default function Home() {
   // const { products } = props;
 
   const { data: products } = useSWR("/api/products", fetcher);
-  console.log(products);
 
   return (
     <>
