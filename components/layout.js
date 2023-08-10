@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
   // };
 
   return (
-    <div className={darkMode ? "oscuro" : ""}>
+    <div>
       {/* <div className={styles.switch}>
         <p>Darkmode</p>
         <Switch value={darkMode} onChange={darkModeChangeHandler} />
