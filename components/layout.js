@@ -1,6 +1,6 @@
 import Navigation from "../components/Navigation";
-import styles from "../styles/sass/main.module.scss";
-import Switch from "react-input-switch";
+// import styles from "../styles/sass/main.module.scss";
+// import Switch from "react-input-switch";
 
 import { useContext } from "react";
 import { Store } from "../utils/Store.js";
