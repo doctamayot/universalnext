@@ -15,7 +15,7 @@ import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-const mensaje = `https://api.whatsapp.com/send?phone=573177936776&text=Hi universal acting%20!!!!!`;
+const mensaje = `https://api.whatsapp.com/send?phone=17862910287&text=Hi universal acting%20!!!!!`;
 
 export default function Home() {
   //const [loading, setLoading] = useState(true);

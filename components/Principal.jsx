@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import Image from "next/image";
 import { BsWhatsapp } from "react-icons/bs";
 import { FiFacebook, FiInstagram, FiTwitter, FiYoutube } from "react-icons/fi";
-const mensaje = `https://api.whatsapp.com/send?phone=4917636877467&text=Hi%20!!!`;
+const mensaje = `https://api.whatsapp.com/send?phone=17862910287&text=Hi universal acting%20!!!!!`;
 const Principal = () => {
   return (
     <div className={styles.principal}>
