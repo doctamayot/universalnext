@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import styles from '../styles/sass/main.module.scss';
-import Swal from 'sweetalert2';
-import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from 'react-icons/bs';
-import { AiOutlineCopyright } from 'react-icons/ai';
-import axios from 'axios';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import styles from "../styles/sass/main.module.scss";
+import Swal from "sweetalert2";
+import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from "react-icons/bs";
+import { AiOutlineCopyright } from "react-icons/ai";
+import axios from "axios";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
-import Modal1 from '@material-ui/core/Modal';
-import Modal2 from '@material-ui/core/Modal';
+import Modal1 from "@material-ui/core/Modal";
+import Modal2 from "@material-ui/core/Modal";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-import { getError } from '../utils/error';
+import { getError } from "../utils/error";
 
 function getModalStyle1() {
   const top = 50;
@@ -37,17 +37,17 @@ function getModalStyle2() {
 }
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: '20px',
-    position: 'absolute',
-    width: '60%',
+    marginTop: "20px",
+    position: "absolute",
+    width: "60%",
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-    fontSize: '2rem',
-    overflow: 'scroll',
-    height: '90%',
-    display: 'block',
+    fontSize: "2rem",
+    overflow: "scroll",
+    height: "90%",
+    display: "block",
   },
 }));
 
@@ -111,7 +111,7 @@ const Footer = () => {
             These terms require the use of arbitration Section 10.2 on an
             individual basis to resolve disputes and also limit the remedies
             available to you in the event of a dispute. These Terms of Use were
-            created with the help of the{' '}
+            created with the help of the{" "}
             <a href="https://www.termsofusegenerator.net">
               Terms Of Use Generator
             </a>
@@ -478,7 +478,7 @@ const Footer = () => {
           </p>
 
           <p>
-            <strong>Notice Requirement and Informal Dispute Resolution.</strong>{' '}
+            <strong>Notice Requirement and Informal Dispute Resolution.</strong>{" "}
             Before either party may seek arbitration, the party must first send
             to the other party a written Notice of Dispute describing the nature
             and basis of the claim or dispute, and the requested relief A Notice
@@ -527,7 +527,7 @@ const Footer = () => {
           <p>
             <strong>
               Additional Rules for Non-Appearance Based Arbitration.
-            </strong>{' '}
+            </strong>{" "}
             If non-appearance based arbitration is elected, the arbitration
             shall be conducted by telephone, online and/or based solely on
             written submissions; the specific manner shall be chosen by the
@@ -741,7 +741,7 @@ const Footer = () => {
             that they shared and/or collect in Universal Acting. This policy is
             not applicable to any information collected offline or via channels
             other than this website. Our Privacy Policy was created with the
-            help of the{' '}
+            help of the{" "}
             <a href="https://www.privacypolicygenerator.info">
               Free Privacy Policy Generator
             </a>
@@ -822,7 +822,7 @@ const Footer = () => {
           </p>
 
           <p>
-            For more general information on cookies, please read{' '}
+            For more general information on cookies, please read{" "}
             <a href="https://www.generateprivacypolicy.com/#cookies">
               the Cookies article on Generate Privacy Policy website
             </a>
@@ -859,7 +859,7 @@ const Footer = () => {
             or websites. Thus, we are advising you to consult the respective
             Privacy Policies of these third-party ad servers for more detailed
             information. It may include their practices and instructions about
-            how to opt-out of certain options.{' '}
+            how to opt-out of certain options.{" "}
           </p>
 
           <p>
@@ -955,34 +955,34 @@ const Footer = () => {
 
   const Toast = Swal.mixin({
     toast: true,
-    position: 'center',
+    position: "center",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
     didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
   const loginSchema = Yup.object().shape({
     firstname: Yup.string()
-      .min(3, 'Name too short')
-      .max(20, 'Name too large')
-      .required('Name is required')
-      .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
+      .min(3, "Name too short")
+      .max(20, "Name too large")
+      .required("Name is required")
+      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
 
     lastname: Yup.string()
-      .min(3, 'Name too short')
-      .max(20, 'Name too large')
-      .required('Name is required')
-      .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
+      .min(3, "Name too short")
+      .max(20, "Name too large")
+      .required("Name is required")
+      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
 
-    email: Yup.string().email('Email not valid').required('Email is required'),
+    email: Yup.string().email("Email not valid").required("Email is required"),
     desc: Yup.string()
-      .min(10, 'Description too short')
-      .max(125, 'Description too large')
-      .required('Description is required')
-      .matches(/^[aA-zZ\s,.,]+$/, 'Only alphabets are allowed for this field '),
+      .min(10, "Description too short")
+      .max(125, "Description too large")
+      .required("Description is required")
+      .matches(/^[aA-zZ\s,.,]+$/, "Only alphabets are allowed for this field "),
   });
 
   const submitHandler = async (values) => {
@@ -1000,12 +1000,12 @@ const Footer = () => {
       console.log(data);
 
       Toast.fire({
-        icon: 'success',
-        title: 'Message sent successfully',
+        icon: "success",
+        title: "Message sent successfully",
       });
     } catch (err) {
       Toast.fire({
-        icon: 'error',
+        icon: "error",
         title: getError(err),
       });
     }
@@ -1020,7 +1020,7 @@ const Footer = () => {
           <h5 className={styles.contfood__maps__title}>Ft. Lauderdale</h5>
           <p className={styles.contfood__maps__dir}>(786) 291-0287</p>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3582.822465049164!2d-80.14589748456852!3d26.104713400687764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d907a5ba22125f%3A0xd36dacf2fbf17b79!2sUniversal%20Acting!5e0!3m2!1ses!2sco!4v1641920370180!5m2!1ses!2sco"
+            src="https://maps.app.goo.gl/ogoVpexEnVY156Sq9"
             loading="lazy"
             allowFullScreen={true}
             className={styles.contfood__maps__map}
@@ -1046,10 +1046,10 @@ const Footer = () => {
       <Formik
         validationSchema={loginSchema}
         initialValues={{
-          firstname: '',
-          lastname: '',
-          email: '',
-          desc: '',
+          firstname: "",
+          lastname: "",
+          email: "",
+          desc: "",
         }}
         onSubmit={async (values, { resetForm }) => {
           await submitHandler(values);
