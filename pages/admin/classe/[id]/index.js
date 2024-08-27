@@ -1,41 +1,41 @@
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import React, { useEffect, useContext, useReducer, useState } from 'react';
-import { Button, CircularProgress } from '@material-ui/core';
-import { getError } from '../../../../utils/error';
-import { Store } from '../../../../utils/Store';
-import styles from '../../../../styles/sass/main.module.scss';
-import { Formik, Form, Field } from 'formik';
-import { NextSeo } from 'next-seo';
-import Image from 'next/image';
-import * as Yup from 'yup';
-import Adminside from '../../../../components/AdminSide';
+import Swal from "sweetalert2";
+import axios from "axios";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import React, { useEffect, useContext, useReducer, useState } from "react";
+import { Button, CircularProgress } from "@material-ui/core";
+import { getError } from "../../../../utils/error";
+import { Store } from "../../../../utils/Store";
+import styles from "../../../../styles/sass/main.module.scss";
+import { Formik, Form, Field } from "formik";
+import { NextSeo } from "next-seo";
+import Image from "next/image";
+import * as Yup from "yup";
+import Adminside from "../../../../components/AdminSide";
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'FETCH_REQUEST':
-      return { ...state, loading: true, error: '' };
-    case 'FETCH_SUCCESS':
-      return { ...state, loading: false, error: '' };
-    case 'FETCH_FAIL':
+    case "FETCH_REQUEST":
+      return { ...state, loading: true, error: "" };
+    case "FETCH_SUCCESS":
+      return { ...state, loading: false, error: "" };
+    case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
-    case 'UPDATE_REQUEST':
-      return { ...state, loadingUpdate: true, errorUpdate: '' };
-    case 'UPDATE_SUCCESS':
-      return { ...state, loadingUpdate: false, errorUpdate: '' };
-    case 'UPDATE_FAIL':
+    case "UPDATE_REQUEST":
+      return { ...state, loadingUpdate: true, errorUpdate: "" };
+    case "UPDATE_SUCCESS":
+      return { ...state, loadingUpdate: false, errorUpdate: "" };
+    case "UPDATE_FAIL":
       return { ...state, loadingUpdate: false, errorUpdate: action.payload };
-    case 'UPLOAD_REQUEST':
-      return { ...state, loadingUpload: true, errorUpload: '' };
-    case 'UPLOAD_SUCCESS':
+    case "UPLOAD_REQUEST":
+      return { ...state, loadingUpload: true, errorUpload: "" };
+    case "UPLOAD_SUCCESS":
       return {
         ...state,
         loadingUpload: false,
-        errorUpload: '',
+        errorUpload: "",
       };
-    case 'UPLOAD_FAIL':
+    case "UPLOAD_FAIL":
       return { ...state, loadingUpload: false, errorUpload: action.payload };
     default:
       return state;
@@ -43,14 +43,14 @@ function reducer(state, action) {
 }
 
 const ProductEdit = ({ params }) => {
-  const [nombre, setValue] = useState('');
-  const [imagecloud, setImage] = useState('');
-  const [imageId, setImageId] = useState('');
+  const [nombre, setValue] = useState("");
+  const [imagecloud, setImage] = useState("");
+  const [imageId, setImageId] = useState("");
   const productId = params.id;
   const { state } = useContext(Store);
   const [{ loadingUpdate, loadingUpload }, dispatch] = useReducer(reducer, {
     loading: true,
-    error: '',
+    error: "",
   });
   const router = useRouter();
 
@@ -58,75 +58,75 @@ const ProductEdit = ({ params }) => {
 
   const loginSchema = Yup.object().shape({
     name: Yup.string()
-      .min(3, 'Name too short')
-      .max(50, 'Name too large')
-      .required('Name is required')
+      .min(3, "Name too short")
+      .max(50, "Name too large")
+      .required("Name is required")
       .matches(
         /^[aA-zZ\s, /, -]+$/,
-        'Only alphabets are allowed for this field '
+        "Only alphabets are allowed for this field "
       ),
-    category: Yup.string().required('Category is required'),
+    category: Yup.string().required("Category is required"),
     //.matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
 
     age: Yup.string()
-      .min(1, 'Age is too short')
-      .max(50, 'Age is too large')
-      .required('Age is required')
-      .matches(/^[0-9,-]+$/, 'Must be only digits'),
+      .min(1, "Age is too short")
+      .max(50, "Age is too large")
+      .required("Age is required")
+      .matches(/^[0-9,-]+$/, "Must be only digits"),
     teacher: Yup.string()
-      .min(3, 'Teacher too short')
-      .max(30, 'Teacher too large')
-      .required('Teacher is required')
-      .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
+      .min(3, "Teacher too short")
+      .max(30, "Teacher too large")
+      .required("Teacher is required")
+      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
 
     shedule: Yup.string()
-      .min(3, 'Shedule too short')
-      .max(100, 'Shedule too large')
-      .required('Shedule is required'),
+      .min(3, "Shedule too short")
+      .max(100, "Shedule too large")
+      .required("Shedule is required"),
 
     days: Yup.string()
-      .min(3, 'Days too short')
-      .max(100, 'Days too large')
-      .required('Days is required'),
+      .min(3, "Days too short")
+      .max(100, "Days too large")
+      .required("Days is required"),
 
     duration: Yup.string()
-      .min(3, 'Duration too short')
-      .max(50, 'Duration too large')
-      .required('Duration is required'),
+      .min(3, "Duration too short")
+      .max(50, "Duration too large")
+      .required("Duration is required"),
     location: Yup.string()
-      .min(3, 'Location too short')
-      .max(50, 'Location too large')
-      .required('Location is required'),
+      .min(3, "Location too short")
+      .max(50, "Location too large")
+      .required("Location is required"),
     price: Yup.string()
-      .min(1, 'Price is too short')
-      .max(6, 'Price is too large')
-      .required('Price is required')
-      .matches(/^[0-9,.]+$/, 'Must be only digits'),
+      .min(1, "Price is too short")
+      .max(6, "Price is too large")
+      .required("Price is required")
+      .matches(/^[0-9,.]+$/, "Must be only digits"),
     subtitle: Yup.string()
-      .min(3, 'Subtitle too short')
-      .max(100, 'Subtitle too large')
-      .required('Subtitle is required'),
+      .min(3, "Subtitle too short")
+      .max(100, "Subtitle too large")
+      .required("Subtitle is required"),
     countInStock: Yup.string()
-      .min(1, 'Places is too short')
-      .max(3, 'Places is too large')
-      .required('Places is required')
-      .matches(/^[0-9]+$/, 'Must be only digits'),
+      .min(1, "Places is too short")
+      .max(3, "Places is too large")
+      .required("Places is required")
+      .matches(/^[0-9]+$/, "Must be only digits"),
   });
 
   useEffect(() => {
     if (!userInfo) {
-      return router.push('/login');
+      return router.push("/login");
     } else {
       const fetchData = async () => {
         try {
-          dispatch({ type: 'FETCH_REQUEST' });
+          dispatch({ type: "FETCH_REQUEST" });
           const { data } = await axios.get(`/api/admin/products/${productId}`, {
             headers: { authorization: `Bearer ${userInfo.token}` },
           });
-          dispatch({ type: 'FETCH_SUCCESS' });
+          dispatch({ type: "FETCH_SUCCESS" });
           setValue(data);
         } catch (err) {
-          dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+          dispatch({ type: "FETCH_FAIL", payload: getError(err) });
         }
       };
       fetchData();
@@ -136,28 +136,28 @@ const ProductEdit = ({ params }) => {
   const uploadHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
-    bodyFormData.append('file', file);
+    bodyFormData.append("file", file);
     try {
-      dispatch({ type: 'UPLOAD_REQUEST' });
-      const { data } = await axios.post('/api/admin/upload', bodyFormData, {
+      dispatch({ type: "UPLOAD_REQUEST" });
+      const { data } = await axios.post("/api/admin/upload", bodyFormData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
           authorization: `Bearer ${userInfo.token}`,
         },
       });
 
-      dispatch({ type: 'UPLOAD_SUCCESS' });
+      dispatch({ type: "UPLOAD_SUCCESS" });
       setImage(data.secure_url);
       setImageId(data.public_id);
 
       Toast.fire({
-        icon: 'success',
-        title: 'Image updated successfully',
+        icon: "success",
+        title: "Image updated successfully",
       });
     } catch (err) {
-      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
+      dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
       Toast.fire({
-        icon: 'error',
+        icon: "error",
         title: getError(err),
       });
     }
@@ -178,7 +178,7 @@ const ProductEdit = ({ params }) => {
     location,
   }) => {
     try {
-      dispatch({ type: 'UPDATE_REQUEST' });
+      dispatch({ type: "UPDATE_REQUEST" });
       const { data } = await axios.put(
         `/api/admin/products/${productId}`,
         {
@@ -200,18 +200,18 @@ const ProductEdit = ({ params }) => {
         },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
-      dispatch({ type: 'UPDATE_SUCCESS' });
+      dispatch({ type: "UPDATE_SUCCESS" });
 
       Toast.fire({
-        icon: 'success',
-        title: 'Class updated successfully',
+        icon: "success",
+        title: "Class updated successfully",
       });
 
       setValue(data);
-      router.push('/admin/classes');
+      router.push("/admin/classes");
     } catch (err) {
       Toast.fire({
-        icon: 'error',
+        icon: "error",
         title: getError(err),
       });
     }
@@ -219,13 +219,13 @@ const ProductEdit = ({ params }) => {
 
   const Toast = Swal.mixin({
     toast: true,
-    position: 'center',
+    position: "center",
     showConfirmButton: false,
     timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
 
@@ -242,7 +242,7 @@ const ProductEdit = ({ params }) => {
           <h4 className={styles.profilefield__title}>Edit Class</h4>
           <div className={styles.botonimagen}>
             <Image
-              src={!nombre.image ? '/img/kids2.jpg' : nombre.image}
+              src={!nombre.image ? "/img/kids2.jpg" : nombre.image}
               alt="imagen universal"
               width={610}
               height={489}
@@ -265,18 +265,18 @@ const ProductEdit = ({ params }) => {
             enableReinitialize={true}
             validationSchema={loginSchema}
             initialValues={{
-              name: nombre ? nombre.name : '',
-              location: nombre ? nombre.location : '',
-              category: nombre ? nombre.category : '',
-              description: nombre ? nombre.description : '',
-              age: nombre ? nombre.age : '',
-              teacher: nombre ? nombre.teacher : '',
-              shedule: nombre ? nombre.shedule : '',
-              days: nombre ? nombre.days : '',
-              duration: nombre ? nombre.duration : '',
-              price: nombre ? nombre.price : '',
-              subtitle: nombre ? nombre.subtitle : '',
-              countInStock: nombre ? nombre.countInStock : '',
+              name: nombre ? nombre.name : "",
+              location: nombre ? nombre.location : "",
+              category: nombre ? nombre.category : "",
+              description: nombre ? nombre.description : "",
+              age: nombre ? nombre.age : "",
+              teacher: nombre ? nombre.teacher : "",
+              shedule: nombre ? nombre.shedule : "",
+              days: nombre ? nombre.days : "",
+              duration: nombre ? nombre.duration : "",
+              price: nombre ? nombre.price : "",
+              subtitle: nombre ? nombre.subtitle : "",
+              countInStock: nombre ? nombre.countInStock : "",
             }}
             onSubmit={async (values, { resetForm }) => {
               await submitHandler(values);
@@ -302,7 +302,7 @@ const ProductEdit = ({ params }) => {
                     >
                       <option value="" label="Select a location" />
                       <option value="Miami" label="Miami" />
-                      <option value="Fort Laurdedale" label="Fort Laurdedale" />
+                      <option value="Wilton Manors" label="Wilton Manors" />
                     </Field>
                     {/* <Field
                       type="text"
