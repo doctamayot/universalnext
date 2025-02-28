@@ -997,7 +997,7 @@ const Footer = () => {
         desc,
       });
 
-      //console.log(data);
+      console.log(data);
 
       Toast.fire({
         icon: "success",
@@ -1009,7 +1009,7 @@ const Footer = () => {
         title: getError(err),
       });
     }
-    //console.log(values);
+    console.log(values);
   };
 
   return (
