@@ -302,7 +302,7 @@ const ProductEdit = ({ params }) => {
                     >
                       <option value="" label="Select a location" />
                       <option value="Miami" label="Miami" />
-                      <option value="Wilton Manors" label="Wilton Manors" />
+                      <option value="Hollywood" label="Hollywood" />
                     </Field>
                     {/* <Field
                       type="text"

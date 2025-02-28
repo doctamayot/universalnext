@@ -1017,10 +1017,10 @@ const Footer = () => {
       <h3 className={styles.contfood__title}>our study places</h3>
       <div className={styles.contfood__maps}>
         <div>
-          <h5 className={styles.contfood__maps__title}>Wilton Manors</h5>
+          <h5 className={styles.contfood__maps__title}>Hollywood</h5>
           <p className={styles.contfood__maps__dir}>(786) 291-0287</p>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581.22984411283!2d-80.1323252!3d26.156642999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d90199f877c475%3A0x66d1f952e1112073!2s2133%20Dixie%20Hwy%2C%20Wilton%20Manors%2C%20FL%2033305%2C%20USA!5e0!3m2!1sen!2sco!4v1721317316189!5m2!1sen!2sco"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3585.8295592185746!2d-80.1509772888062!3d26.00640009835519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9ab9ead256723%3A0x36d47a7e88bf479e!2s601%20S%2021st%20Ave%2C%20Hollywood%2C%20FL%2033020%2C%20EE.%20UU.!5e0!3m2!1ses!2sco!4v1740758262758!5m2!1ses!2sco"
             loading="lazy"
             allowFullScreen={true}
             className={styles.contfood__maps__map}
